@@ -56,6 +56,10 @@ public class UDPReceiver extends Thread {
         }
         socket.close();
     }
+    
+    public void dispose(){
+    	socket.close();
+    }
 
 	private PRC_CommandData StringtoCmd(String received) {
 		String [] elements = received.split(","); 

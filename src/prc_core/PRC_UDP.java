@@ -314,8 +314,11 @@ public class PRC_UDP {
 				
 			}
 		}
-		
-		
+	
+	}
+	
+	public void dispose(){
+		udprec.dispose();
 	}
 	
 private AbstractFrame PRC_SetRedundancy(LBR robot, PRC_CommandData cmd) {

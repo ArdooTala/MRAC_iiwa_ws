@@ -49,17 +49,20 @@ import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
  * @see #dispose()
  */
 public class PRC_RunUDP extends RoboticsAPIApplication {
+	
 	private Controller kuka_Sunrise_Cabinet_1;
 	private LBR lbr_iiwa;
-
+	private PRC_UDP prc_udp;
 
 	@Override
 	public void initialize() {
 		kuka_Sunrise_Cabinet_1 = (Controller) getContext().getControllers().toArray()[0];
 		lbr_iiwa = (LBR) kuka_Sunrise_Cabinet_1.getDevices().toArray()[0];
 		// miiwa = (MobilePlatform) kuka_Sunrise_Cabinet_1.getDevice("KMP_omniMove_400_1");
+		
+		prc_udp = new PRC_UDP();
 	}
-
+	
 	@Override
 	public void run() {
 		LBR robot = lbr_iiwa; //SET ROBOT
@@ -70,8 +73,6 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 		//Beckhoff_OUTIOGroup iogrp = new Beckhoff_OUTIOGroup(kuka_Sunrise_Cabinet_1);
 		//AbstractIOGroup iogrp = iogrp;
 		
-		PRC_UDP prc_udp = new PRC_UDP();
-
 		try {
 			prc_udp.CORE_UDP(robot, kuka_Sunrise_Cabinet_1, getApplicationData().createFromTemplate(toolname), tcpname, baseFrame, enablellogging, getLogger(), getApplicationData(), null, "172.31.1.148", 49152);
 		} catch (SocketException e) {
@@ -80,10 +81,18 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 		} catch (UnknownHostException e) {
 			// TODO Automatisch generierter Erfassungsblock
 			e.printStackTrace();
+		}finally{
+			prc_udp.dispose();
 		}
 
 	}
-
+	//FIXME 1904.David.G.-That should kill the receiver UDP port in Sunrise part if something goes wrong.
+	@Override
+	public void dispose() {
+		getLogger().warn("Something went wrong. Killing app.");
+		prc_udp.dispose();
+		super.dispose();
+	}
 
 	/**
 	 * Auto-generated method stub. Do not modify the contents of this method.
