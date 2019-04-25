@@ -63,8 +63,8 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 	@Override
 	public void run() {
 		LBR robot = lbr_iiwa; //SET ROBOT
-		String toolname = "Gripper"; //SET TOOL NAME
-		String tcpname = "Gripper frame"; //SET TCP NAME
+		String toolname = "PolierVib"; //SET TOOL NAME
+		String tcpname = "TCP"; //SET TCP NAME
 		ObjectFrame baseFrame = getApplicationData().getFrame("/HaringBase"); //OPTIONAL: SET BASE COORDINATE SYSTEM
 		boolean enablellogging = true; //OPTIONAL: ENABLE CONSOLE LOGGING
 		//Beckhoff_OUTIOGroup iogrp = new Beckhoff_OUTIOGroup(kuka_Sunrise_Cabinet_1);
