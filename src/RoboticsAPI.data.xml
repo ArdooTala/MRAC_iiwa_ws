@@ -102,6 +102,12 @@
                 <info key="LastModificationTime" type="java.lang.Long" value="1519849285525"/>
             </additionalInformation>
         </frame>
+        <frame id="_15a4877c-6185-4d5a-ae1a-beec98c5ff6c" name="HaringBase">
+            <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+            <additionalInformation>
+                <info key="LastModificationTime" type="java.lang.Long" value="1556194378530"/>
+            </additionalInformation>
+        </frame>
     </world>
     <objectTemplates>
         <toolTemplate class="" name="PolierVib">
