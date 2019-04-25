@@ -28,7 +28,7 @@ public class Impedance extends RoboticsAPIApplication {
 	@Inject @Named("PolierVib") private Tool tool;
 	
 	
-	private static double[] startPosition=new double[]{0,offsetAxis2And4,0,offsetAxis2And4-Math.toRadians(90),0,Math.toRadians(90),0};
+	private static double[] startPosition=new double[]{0,Math.toRadians(-35.62),0,Math.toRadians(-93.0),0,Math.toRadians(32.14),0};
 	private final static String informationText=
 			"This application is intended for floor mounted robots!"+ "\n" +
 			"\n" +
@@ -40,7 +40,6 @@ public class Impedance extends RoboticsAPIApplication {
 
 	public void initialize() {
 		lbr.detachAll();
-		
 		tool.attachTo(lbr.getFlange());
 	}
 
