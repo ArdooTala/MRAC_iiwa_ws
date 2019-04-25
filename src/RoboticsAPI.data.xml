@@ -124,7 +124,7 @@
             <additionalInformation>
                 <info key="SafetyID" type="java.lang.Integer" value="0"/>
             </additionalInformation>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="-8.68997434444959" cogY="61.37922300062465" cogZ="-12.24606316060787" inertiaX="0.01" inertiaY="0.01" inertiaZ="0.01" mass="1.366858558525977"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="-28.169774308127113" cogY="-0.6083009217654034" cogZ="79.31958561970168" inertiaX="0.01" inertiaY="0.01" inertiaZ="0.01" mass="8.381130201111265"/>
         </toolTemplate>
     </objectTemplates>
     <processDataContainer>
