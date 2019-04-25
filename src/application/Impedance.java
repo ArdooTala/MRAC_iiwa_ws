@@ -1,12 +1,14 @@
 package application;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.CartDOF;
+import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.motionModel.IMotionContainer;
 import com.kuka.roboticsAPI.motionModel.PTP;
 import com.kuka.roboticsAPI.motionModel.PositionHold;
@@ -20,8 +22,12 @@ public class Impedance extends RoboticsAPIApplication {
 	private static final int stiffnessZ = 2500;
 	private static final int stiffnessY = 700;
 	private static final int stiffnessX = 1500;
+	
 	@Inject
 	private LBR lbr;
+	@Inject @Named("PolierVib") private Tool tool;
+	
+	
 	private static double[] startPosition=new double[]{0,offsetAxis2And4,0,offsetAxis2And4-Math.toRadians(90),0,Math.toRadians(90),0};
 	private final static String informationText=
 			"This application is intended for floor mounted robots!"+ "\n" +
@@ -33,6 +39,9 @@ public class Impedance extends RoboticsAPIApplication {
 
 
 	public void initialize() {
+		lbr.detachAll();
+		
+		tool.attachTo(lbr.getFlange());
 	}
 
 	public void run() {
