@@ -89,7 +89,7 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 	//FIXME 1904.David.G.-That should kill the receiver UDP port in Sunrise part if something goes wrong.
 	@Override
 	public void dispose() {
-		getLogger().warn("Something went wrong. Killing app.");
+		getLogger().warn("Something went wrong. Killing Threads and comms.");
 		prc_udp.dispose();
 		super.dispose();
 	}

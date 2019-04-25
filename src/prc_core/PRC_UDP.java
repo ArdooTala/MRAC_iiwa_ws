@@ -14,6 +14,7 @@ import prc_classes.PRC_CommandData;
 import prc_classes.PRC_Enums;
 import prc_classes.PRC_IOGroupExtended;
 
+import sun.security.action.GetLongAction;
 import threads.UDPReceiver;
 import threads.UDPSender;
 
@@ -319,6 +320,7 @@ public class PRC_UDP {
 	
 	public void dispose(){
 		udprec.dispose();
+		udpsend.dispose();
 	}
 	
 private AbstractFrame PRC_SetRedundancy(LBR robot, PRC_CommandData cmd) {

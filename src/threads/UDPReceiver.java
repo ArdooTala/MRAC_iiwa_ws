@@ -58,6 +58,7 @@ public class UDPReceiver extends Thread {
     }
     
     public void dispose(){
+    	running=false;
     	socket.close();
     }
 

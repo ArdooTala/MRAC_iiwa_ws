@@ -58,6 +58,11 @@ public class UDPSender extends Thread {
         }
         socket.close();
     }
+    
+    public void dispose(){
+    	running=false;
+    	socket.close();
+    }
 
 	private String CollectPayload(LBR robot2, ObjectFrame toolframe2) {
 		JointPosition jointpos = robot2.getCurrentJointPosition();
