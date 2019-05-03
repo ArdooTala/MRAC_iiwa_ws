@@ -11,7 +11,7 @@
             <Interface id="com.kuka/Controller/EtherCAT" version="0.1.0"/>
             <Interface id="com.kuka/Controller/Windows" version="0.1.18"/>
             <Interface id="com.kuka/Controller/Controller" version="0.1.0"/>
-            <TopologyItem itemPath="com.kuka/LBR5_14kg" name="LBR_iiwa_14_R820_1" selectedVersion="2" uniqueID="762d34df-b6f9-49f6-b8ca-4616293bf394">
+            <TopologyItem itemPath="com.kuka/LBR5_14kg" name="LBR_iiwa_14_R820_1" selectedVersion="2" uniqueID="8430778f-f6a2-4cbb-beb4-3342b438a6d5">
                 <Interface id="com.kuka/LBR5/LBRHardware" version="0.1.0"/>
                 <Interface id="com.kuka/LBR/LBR5" version="0.1.0"/>
                 <Interface id="com.kuka/LBR/Flansch" version="0.1.0"/>
