@@ -137,7 +137,7 @@
                 <info key="ID" type="java.lang.String" value="7c7cd4e9-4c21-4ab0-ab19-2ec03621c4b7"/>
                 <info key="SafetyID" type="java.lang.Integer" value="1"/>
             </additionalInformation>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.0"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="11.716488023223059" cogY="25.48701946129475" cogZ="26.8305864113358" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.5592213375819028"/>
         </toolTemplate>
     </objectTemplates>
     <processDataContainer>
