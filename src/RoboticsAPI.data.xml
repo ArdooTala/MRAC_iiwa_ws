@@ -127,7 +127,7 @@
             </additionalInformation>
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="9.346285155716885" cogY="20.675599153188003" cogZ="29.761286529876724" inertiaX="0.01" inertiaY="0.01" inertiaZ="0.01" mass="1.9033944399588443"/>
         </toolTemplate>
-        <toolTemplate class="" name="ToolTemplate">
+        <toolTemplate class="" name="SCGripper">
             <frames>
                 <frame id="_9d28347f-5a67-4388-bb46-7eec275b0afc" name="TCP">
                     <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
