@@ -130,7 +130,8 @@
         <toolTemplate class="" name="SCGripper">
             <frames>
                 <frame id="_9d28347f-5a67-4388-bb46-7eec275b0afc" name="TCP">
-                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="88.0"/>
+                    <transformation a="0.0" b="0.0" c="0.0" x="2.505459812874111" y="1.6437055471109878" z="88.1277902934825"/>
+                    <measurementTranslation calculationError="0.5967181510966473" method="XYZ4Point" timestamp="1558630090365"/>
                 </frame>
             </frames>
             <additionalInformation>
