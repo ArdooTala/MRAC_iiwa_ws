@@ -130,15 +130,14 @@
         <toolTemplate class="" name="ToolTemplate">
             <frames>
                 <frame id="_9d28347f-5a67-4388-bb46-7eec275b0afc" name="TCP">
-                    <transformation a="0.0" b="0.0" c="0.0" x="0.8822120993958208" y="0.52832041995269" z="88.46737098224051"/>
-                    <measurementTranslation calculationError="0.4798677215388626" method="XYZ4Point" timestamp="1558627470387"/>
+                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
                 </frame>
             </frames>
             <additionalInformation>
                 <info key="ID" type="java.lang.String" value="7c7cd4e9-4c21-4ab0-ab19-2ec03621c4b7"/>
                 <info key="SafetyID" type="java.lang.Integer" value="1"/>
             </additionalInformation>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="5.575550060670045" cogY="20.96913548049562" cogZ="28.180311337606152" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.9195455142116187"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.0"/>
         </toolTemplate>
     </objectTemplates>
     <processDataContainer>
