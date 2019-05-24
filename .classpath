@@ -85,16 +85,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/IAAC_prc14MFip/KUKAJavaLib/com.kuka.roboticsAPI.handGuiding_1.16.0.9-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.statuscontroller_1.1.0.9.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/IAAC_prc14MFip/KUKAJavaLib/com.kuka.statuscontroller_1.1.0.9-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.statuscontroller.statusgroups_1.1.0.9.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/IAAC_prc14MFip/KUKAJavaLib/com.kuka.statuscontroller.statusgroups_1.1.0.9-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.sunrise.common_1.0.0.9.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/IAAC_prc14MFip/KUKAJavaLib/com.kuka.sunrise.common_1.0.0.9-javadoc.jar!/"/>
