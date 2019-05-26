@@ -93,7 +93,7 @@ public class PRC_UDP {
 			int k = 0;
 			for (PRC_CommandData cmd : udpcmds) {
 				
-				if (k>3)
+				if (k>5)
 				{
 					while (!motionContainers.get(k-5).isFinished())
 						ThreadUtil.milliSleep(50);
