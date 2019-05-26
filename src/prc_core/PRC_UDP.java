@@ -75,7 +75,7 @@ public class PRC_UDP {
 		udprec.start();
 		
 		ArrayList<IMotionContainer> motionContainers = new ArrayList<IMotionContainer>();
-		
+		int k = 0;
 		
 		while (true) {
 			ArrayList<PRC_CommandData> udpcmds = new ArrayList<PRC_CommandData>();
@@ -90,7 +90,7 @@ public class PRC_UDP {
 					}
 				}
 			}
-			int k = 0;
+			
 			for (PRC_CommandData cmd : udpcmds) {
 				
 				if (k>5)
