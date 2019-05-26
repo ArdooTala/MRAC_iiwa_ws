@@ -72,7 +72,7 @@ public class PRC_SmartServo {
 		udprec.start();
 		
 		ArrayList<IMotionContainer> motionContainers = new ArrayList<IMotionContainer>();
-		int k = 0;
+
 		
 		AbstractFrame initialPosition = robot.getCurrentCartesianPosition(actTCP);
 
