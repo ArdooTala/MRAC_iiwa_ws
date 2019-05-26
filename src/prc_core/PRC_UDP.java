@@ -218,7 +218,7 @@ public class PRC_UDP {
 					ImpedanceControl.parametrize(CartDOF.ROT).setStiffness(300);
 					
 					
-					if (cmd.linCompMove.interpolation == "" || cmd.linMove.interpolation == " ")
+					if (cmd.linCompMove.interpolation == "" || cmd.linCompMove.interpolation == " ")
 					{
 						actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(ImpedanceControl));
 					}
