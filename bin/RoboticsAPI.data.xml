@@ -142,8 +142,7 @@
         <toolTemplate class="" name="Tool">
             <frames>
                 <frame id="_37fed3c6-9fba-41e4-a267-80a0cd95c817" name="TCP">
-                    <transformation a="0.0" b="0.0" c="0.0" x="25.94968709129859" y="-0.3815278183129886" z="26.56277969124771"/>
-                    <measurementTranslation calculationError="5.341651830517517" method="XYZ4Point" timestamp="1558867016037"/>
+                    <transformation a="0.0" b="-1.6" c="0.0" x="25.94968709129859" y="-0.3815278183129886" z="26.56277969124771"/>
                 </frame>
             </frames>
             <additionalInformation>
