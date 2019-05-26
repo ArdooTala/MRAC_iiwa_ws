@@ -229,7 +229,7 @@ public class PRC_UDP {
 						k++;
 					}
 
-					if (enablelogging){logger.info(cmd.linMove.ToString());}
+					if (enablelogging){logger.info(cmd.linCompMove.ToString());}
 				} else if (cmd.prccmdType.equals(PRC_Enums.PTP)){
 					if (baseFrame != null)
 					{

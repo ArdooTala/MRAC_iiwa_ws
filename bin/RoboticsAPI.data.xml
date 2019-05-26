@@ -3,11 +3,10 @@
     <world>
         <gravitation x="0.0" y="0.0" z="9.81"/>
         <frame id="_f13bb652-bf00-4cb2-8ea9-055e52466f94" name="BASE1">
-            <transformation a="-1.5727436047208174" b="-0.009549555928928179" c="0.006918550659981877" x="607.3678158946122" y="-38.75981601489778" z="170.11600161041804"/>
+            <transformation a="0.0" b="0.0" c="0.0" x="500.0" y="0.0" z="250.0"/>
             <additionalInformation>
-                <info key="LastModificationTime" type="java.lang.Long" value="1539159685500"/>
+                <info key="LastModificationTime" type="java.lang.Long" value="1558861966938"/>
                 <info key="UseAsBaseForJogging" type="java.lang.Boolean" value="true"/>
-                <info measurementMethod="Base3Point" timestamp="1539159685500" type="com.kuka.roboticsAPI.deviceModel.MeasurementInformation"/>
             </additionalInformation>
         </frame>
         <frame id="_a4176be6-6aec-4fc3-8ca9-7fc026279c37" name="StartPos">
@@ -139,6 +138,17 @@
                 <info key="SafetyID" type="java.lang.Integer" value="1"/>
             </additionalInformation>
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="11.716488023223059" cogY="25.48701946129475" cogZ="26.8305864113358" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.5592213375819028"/>
+        </toolTemplate>
+        <toolTemplate class="" name="Tool">
+            <frames>
+                <frame id="_37fed3c6-9fba-41e4-a267-80a0cd95c817" name="TCP">
+                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                </frame>
+            </frames>
+            <additionalInformation>
+                <info key="ID" type="java.lang.String" value="e0561dae-5cf4-466f-9255-8656c903d6ba"/>
+            </additionalInformation>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.0"/>
         </toolTemplate>
     </objectTemplates>
     <processDataContainer>

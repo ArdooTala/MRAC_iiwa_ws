@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 import prc_classes.PRC_XMLOUT;
 import prc_core.PRC_CORE;
+import prc_core.PRC_SmartServo;
 import prc_core.PRC_UDP;
 
 
@@ -48,11 +49,11 @@ import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
  * @see #run()
  * @see #dispose()
  */
-public class PRC_RunUDP extends RoboticsAPIApplication {
+public class PRC_RunSmartServo extends RoboticsAPIApplication {
 	
 	private Controller kuka_Sunrise_Cabinet_1;
 	private LBR lbr_iiwa;
-	private PRC_UDP prc_udp;
+	private PRC_SmartServo prc_ss;
 
 	@Override
 	public void initialize() {
@@ -60,7 +61,7 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 		lbr_iiwa = (LBR) kuka_Sunrise_Cabinet_1.getDevices().toArray()[0];
 		// miiwa = (MobilePlatform) kuka_Sunrise_Cabinet_1.getDevice("KMP_omniMove_400_1");
 		
-		prc_udp = new PRC_UDP();
+		prc_ss = new PRC_SmartServo();
 	}
 	
 	@Override
@@ -74,7 +75,7 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 		//AbstractIOGroup iogrp = iogrp;
 		
 		try {
-			prc_udp.CORE_UDP(robot, kuka_Sunrise_Cabinet_1, getApplicationData().createFromTemplate(toolname), tcpname, baseFrame, enablellogging, getLogger(), getApplicationData(), null, "172.31.1.148", 49152);
+			prc_ss.CORE_SmartServo(robot, kuka_Sunrise_Cabinet_1, getApplicationData().createFromTemplate(toolname), tcpname, baseFrame, enablellogging, getLogger(), getApplicationData(), null, "172.31.1.148", 49152);
 		} catch (SocketException e) {
 			// TODO Automatisch generierter Erfassungsblock
 			e.printStackTrace();
@@ -82,7 +83,7 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 			// TODO Automatisch generierter Erfassungsblock
 			e.printStackTrace();
 		}finally{
-			prc_udp.dispose();
+			prc_ss.dispose();
 		}
 
 	}
@@ -90,7 +91,7 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 	@Override
 	public void dispose() {
 		getLogger().warn("Something went wrong. Killing Threads and comms.");
-		prc_udp.dispose();
+		prc_ss.dispose();
 		super.dispose();
 	}
 
@@ -98,7 +99,7 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 	 * Auto-generated method stub. Do not modify the contents of this method.
 	 */
 	public static void main(String[] args) {
-		PRC_RunUDP app = new PRC_RunUDP();
+		PRC_RunSmartServo app = new PRC_RunSmartServo();
 		app.runApplication();
 	}
 }
