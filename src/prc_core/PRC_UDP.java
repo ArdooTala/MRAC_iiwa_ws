@@ -95,7 +95,7 @@ public class PRC_UDP {
 				
 				if (k>3)
 				{
-					while (!motionContainers.get(k-3).isFinished())
+					while (!motionContainers.get(k-5).isFinished())
 						ThreadUtil.milliSleep(50);
 				}
 				
