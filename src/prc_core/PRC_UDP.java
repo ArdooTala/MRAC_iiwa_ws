@@ -213,7 +213,7 @@ public class PRC_UDP {
 					CartesianImpedanceControlMode ImpedanceControl = new CartesianImpedanceControlMode();
 					ImpedanceControl.parametrize(CartDOF.ALL).setDamping(0.7);
 					
-					if (cmd.linCompMove.addFX + cmd.linCompMove.addFY + cmd.linCompMove.addFZ > 0)
+					if (cmd.linCompMove.addFX + cmd.linCompMove.addFY + cmd.linCompMove.addFZ != 0)
 					{
 					ImpedanceControl.parametrize(CartDOF.X).setStiffness(cmd.linCompMove.stiffX).setAdditionalControlForce(cmd.linCompMove.addFX);
 					ImpedanceControl.parametrize(CartDOF.Y).setStiffness(cmd.linCompMove.stiffY).setAdditionalControlForce(cmd.linCompMove.addFY);
