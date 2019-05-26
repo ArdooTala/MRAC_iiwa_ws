@@ -619,7 +619,7 @@
                     <transformation a="0.0" b="-1.5707963267948966" c="0.0" x="0.0" y="0.0" z="135.0"/>
                 </frame>
             </frames>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="-0.2979878502070711" cogY="38.91702658077944" cogZ="2.352477444086967" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.7479164033767711"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="-474.17747732622456" cogY="-467.0620257779205" cogZ="8.779920320896222" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.05501524653470888"/>
         </toolTemplate>
         <toolTemplate class="" name="PolierVib">
             <frames>
