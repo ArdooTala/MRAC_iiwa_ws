@@ -99,7 +99,6 @@ public class Demo extends RoboticsAPIApplication {
 
 		// World-Frame
 		world = World.Current.getRootFrame();
-		lBR_iiwa_7_R800_1.setESMState("2");
 
 		// Force condition for gesture control
 		gestureForceVal = getApplicationData().getProcessData("gestureForce")
@@ -696,41 +695,41 @@ public class Demo extends RoboticsAPIApplication {
 
 			switch (sel) {
 			case 0:
-				lBR_iiwa_7_R800_1.setESMState("2");
+
 				actTCP.move(ptp(getFrame("/Demo/startP")).setJointVelocityRel(
 						0.2));
 				break;
 			case 1:
-				lBR_iiwa_7_R800_1.setESMState("2");
+
 				moveCartesian(1);
 				break;
 			case 2:
-				lBR_iiwa_7_R800_1.setESMState("2");
+
 				moveNullspace(1);
 				break;
 			case 3:
-				lBR_iiwa_7_R800_1.setESMState("3");
+
 				stiffness();
 				break;
 			case 4:
-				lBR_iiwa_7_R800_1.setESMState("2");
+
 				wiggleBounce();
 				break;
 			case 5:
-				lBR_iiwa_7_R800_1.setESMState("2");
+
 				collisionDetection(3);
 				break;
 			case 6:
-				lBR_iiwa_7_R800_1.setESMState("2");
+
 				recordTrack();
 				break;
 			case 7:
-				lBR_iiwa_7_R800_1.setESMState("2");
+
 				teachMe();
 				break;
 
 			default:
-				lBR_iiwa_7_R800_1.setESMState("2");
+
 				actTCP.move(ptp(getFrame("/Demo/startP")).setJointVelocityRel(
 						0.2));
 				break;
