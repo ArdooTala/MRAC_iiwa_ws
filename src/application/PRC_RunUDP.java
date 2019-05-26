@@ -74,7 +74,7 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 		//AbstractIOGroup iogrp = iogrp;
 		
 		try {
-			prc_udp.CORE_UDP(robot, kuka_Sunrise_Cabinet_1, getApplicationData().createFromTemplate(toolname), tcpname, baseFrame, enablellogging, getLogger(), getApplicationData(), null, "172.31.1.148", 49152);
+			prc_udp.CORE_UDP(robot, kuka_Sunrise_Cabinet_1, getApplicationData().createFromTemplate(toolname), tcpname, baseFrame, enablellogging, getLogger(), getApplicationData(), null, "172.31.1.149", 49152);
 		} catch (SocketException e) {
 			// TODO Automatisch generierter Erfassungsblock
 			e.printStackTrace();
