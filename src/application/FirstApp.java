@@ -7,6 +7,7 @@ import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.Tool;
+import com.kuka.roboticsAPI.motionModel.IMotionContainer;
 
 /**
  * Implementation of a robot application.
@@ -49,7 +50,17 @@ public class FirstApp extends RoboticsAPIApplication {
 		
 		actTCP.move(ptp(getApplicationData().getFrame("/P1")).setJointVelocityRel(0.33));
 		
-		actTCP.moveAsync(lin(getApplicationData().getFrame("/P2")).setCartVelocity(100).setBlendingCart(4));
+		IMotionContainer handle = actTCP.moveAsync(lin(getApplicationData().getFrame("/P2")).setCartVelocity(100).setBlendingCart(4));
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		handle.cancel();
+		
 		
 		actTCP.moveAsync(lin(getApplicationData().getFrame("/P3")).setCartVelocity(100).setBlendingCart(4));
 		
