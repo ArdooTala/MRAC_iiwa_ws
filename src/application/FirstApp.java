@@ -47,6 +47,7 @@ public class FirstApp extends RoboticsAPIApplication {
 		tool.attachTo(lBR_iiwa_14_R820_1.getFlange());
 		actTCP = tool.getFrame("/TCP");
 		
+		actTCP.move(ptp(getApplicationData().getFrame("/P1")));
 		
 
 		
