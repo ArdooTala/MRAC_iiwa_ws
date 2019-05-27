@@ -36,6 +36,6 @@ public class FirstApp extends RoboticsAPIApplication {
 	@Override
 	public void run() {
 		// your application execution starts here
-		lBR_iiwa_14_R820_1.move(ptp(10,0,0,0,0,0,0));
+		lBR_iiwa_14_R820_1.move(ptp(Math.toRadians(10),0,0,0,0,0,0));
 	}
 }
