@@ -49,6 +49,7 @@ public class FirstApp extends RoboticsAPIApplication {
 		
 		actTCP.move(ptp(getApplicationData().getFrame("/P1")).setJointVelocityRel(0.33));
 		
+		lBR_iiwa_14_R820_1.move(ptp(Math.toRadians(10),0,0,0,0,0,0).setJointVelocityRel(0.8));
 
 		
 	}
