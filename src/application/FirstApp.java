@@ -1,13 +1,18 @@
 package application;
 
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
+
+import com.kuka.roboticsAPI.conditionModel.ForceCondition;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.CartDOF;
 import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.Tool;
+import com.kuka.roboticsAPI.geometricModel.math.CoordinateAxis;
 import com.kuka.roboticsAPI.motionModel.IMotionContainer;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
 
@@ -71,9 +76,24 @@ public class FirstApp extends RoboticsAPIApplication {
 		
 		handle.cancel();
 		
+		actTCP.move(ptp(getApplicationData().getFrame("/P4")).setJointVelocityRel(0.33));
 		
-		actTCP.moveAsync(lin(getApplicationData().getFrame("/P3")).setCartVelocity(10).setBlendingCart(4).setMode(soft));
+		ForceCondition forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.Z, 5);
+
+		actTCP.move(lin(getApplicationData().getFrame("/P5")).setCartVelocity(6).breakWhen(forceDetected));
 		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		actTCP.move(lin(getApplicationData().getFrame("/P4")).setCartVelocity(6));
+		
+		
+		//actTCP.moveAsync(lin(getApplicationData().getFrame("/P3")).setCartVelocity(10).setBlendingCart(4).setMode(soft));
+	
 		lBR_iiwa_14_R820_1.move(ptp(Math.toRadians(10),0,0,0,0,0,0).setJointVelocityRel(0.8).setJointAccelerationRel(0.15));
 
 		
