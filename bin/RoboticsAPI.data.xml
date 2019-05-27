@@ -611,6 +611,18 @@
                 <info key="LastModificationTime" type="java.lang.Long" value="1556194378530"/>
             </additionalInformation>
         </frame>
+        <frame id="_d8628639-1b8f-4470-add4-34ee6a2a3fbc" name="P3">
+            <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+            <additionalInformation>
+                <info key="LastModificationTime" type="java.lang.Long" value="1558967356354"/>
+            </additionalInformation>
+        </frame>
+        <frame id="_cb8096dc-7e91-4efa-a3f1-c22fec746ae2" name="P4">
+            <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+            <additionalInformation>
+                <info key="LastModificationTime" type="java.lang.Long" value="1558967370135"/>
+            </additionalInformation>
+        </frame>
     </world>
     <objectTemplates>
         <toolTemplate class="" name="Pin">
@@ -674,7 +686,6 @@
             <frames>
                 <frame id="_cbe74af5-1e20-4699-8561-5a06667962f2" name="TCP">
                     <transformation a="0.0" b="0.0" c="0.0" x="-8.899018066521194" y="5.7697481208061845" z="135.60872964171108"/>
-                    <measurementTranslation calculationError="5.522305587923256" method="XYZ4Point" timestamp="1558970126951"/>
                 </frame>
             </frames>
             <additionalInformation>

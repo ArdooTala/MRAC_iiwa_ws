@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 import com.kuka.roboticsAPI.deviceModel.LBR;
+import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
+import com.kuka.roboticsAPI.geometricModel.Tool;
 
 /**
  * Implementation of a robot application.
@@ -27,6 +29,9 @@ import com.kuka.roboticsAPI.deviceModel.LBR;
 public class FirstApp extends RoboticsAPIApplication {
 	@Inject
 	private LBR lBR_iiwa_14_R820_1;
+	private Tool tool;
+	private ObjectFrame actTCP;
+
 
 	@Override
 	public void initialize() {
@@ -37,5 +42,13 @@ public class FirstApp extends RoboticsAPIApplication {
 	public void run() {
 		// your application execution starts here
 		lBR_iiwa_14_R820_1.move(ptp(Math.toRadians(10),0,0,0,0,0,0));
+		
+		tool = createFromTemplate("IAACGripper");
+		tool.attachTo(lBR_iiwa_14_R820_1.getFlange());
+		actTCP = tool.getFrame("/TCP");
+		
+		
+
+		
 	}
 }
