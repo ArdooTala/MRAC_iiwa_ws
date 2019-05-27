@@ -5,9 +5,11 @@ import javax.inject.Inject;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 import com.kuka.roboticsAPI.deviceModel.LBR;
+import com.kuka.roboticsAPI.geometricModel.CartDOF;
 import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.motionModel.IMotionContainer;
+import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
 
 /**
  * Implementation of a robot application.
@@ -32,6 +34,7 @@ public class FirstApp extends RoboticsAPIApplication {
 	private LBR lBR_iiwa_14_R820_1;
 	private Tool tool;
 	private ObjectFrame actTCP;
+	private CartesianImpedanceControlMode soft;
 
 
 	@Override
@@ -41,6 +44,13 @@ public class FirstApp extends RoboticsAPIApplication {
 
 	@Override
 	public void run() {
+		
+		soft = new CartesianImpedanceControlMode();
+		soft.parametrize(CartDOF.ALL).setDamping(.7);
+		soft.parametrize(CartDOF.ROT).setStiffness(100);
+		soft.parametrize(CartDOF.TRANSL).setStiffness(600);
+
+		
 		// your application execution starts here
 		lBR_iiwa_14_R820_1.move(ptp(Math.toRadians(10),0,0,0,0,0,0));
 		
@@ -62,7 +72,7 @@ public class FirstApp extends RoboticsAPIApplication {
 		handle.cancel();
 		
 		
-		actTCP.moveAsync(lin(getApplicationData().getFrame("/P3")).setCartVelocity(100).setBlendingCart(4));
+		actTCP.moveAsync(lin(getApplicationData().getFrame("/P3")).setCartVelocity(10).setBlendingCart(4).setMode(soft));
 		
 		lBR_iiwa_14_R820_1.move(ptp(Math.toRadians(10),0,0,0,0,0,0).setJointVelocityRel(0.8).setJointAccelerationRel(0.15));
 
