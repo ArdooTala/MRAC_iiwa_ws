@@ -20,6 +20,7 @@ import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.geometricModel.math.CoordinateAxis;
 import com.kuka.roboticsAPI.motionModel.IMotionContainer;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
+import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
 
 /**
  * Implementation of a robot application.
@@ -55,6 +56,20 @@ public class FirstApp extends RoboticsAPIApplication {
 
 	@Override
 	public void run() {
+		
+		int sel = getApplicationUI().displayModalDialog(
+				ApplicationDialogType.QUESTION, "What to do?", "Do Something", "Do Something Else", "Do Something Different");
+
+				switch (sel) {
+				case 0:
+				//do
+				case 1:
+				//do
+				case 2:
+				//do
+				default:
+				//do default
+				}
 		
 		ios = new BeckhoffIOIOGroup((Controller) getContext().getControllers().toArray()[0]);
 		
@@ -120,6 +135,8 @@ public class FirstApp extends RoboticsAPIApplication {
 
 		actTCP.move(lin(getApplicationData().getFrame("/P4")).setCartVelocity(6));
 		
+		double stiffness = getApplicationData().getProcessData("stiffness").getValue();
+
 		
 		//actTCP.moveAsync(lin(getApplicationData().getFrame("/P3")).setCartVelocity(10).setBlendingCart(4).setMode(soft));
 	
