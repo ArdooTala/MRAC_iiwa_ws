@@ -670,6 +670,17 @@
             </frames>
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.0"/>
         </toolTemplate>
+        <toolTemplate class="" name="IAACGripper">
+            <frames>
+                <frame id="_cbe74af5-1e20-4699-8561-5a06667962f2" name="TCP">
+                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                </frame>
+            </frames>
+            <additionalInformation>
+                <info key="ID" type="java.lang.String" value="c368f9d7-6d90-4908-ae33-1c6a6ae989a7"/>
+            </additionalInformation>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.0"/>
+        </toolTemplate>
     </objectTemplates>
     <processDataContainer>
         <processData dataType="java.lang.Double" defaultValue="1000" displayName="Tool Stiffness" id="stiffness" max="5000.0" min="0.0" value="500"/>
