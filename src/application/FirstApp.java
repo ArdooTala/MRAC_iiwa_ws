@@ -4,11 +4,16 @@ package application;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+
+import com.kuka.generated.ioAccess.BeckhoffIOIOGroup;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 
 import com.kuka.roboticsAPI.conditionModel.ForceCondition;
+import com.kuka.roboticsAPI.conditionModel.ICallbackAction;
+import com.kuka.roboticsAPI.controllerModel.Controller;
 import com.kuka.roboticsAPI.deviceModel.LBR;
+import com.kuka.roboticsAPI.executionModel.IFiredTriggerInfo;
 import com.kuka.roboticsAPI.geometricModel.CartDOF;
 import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.Tool;
@@ -40,6 +45,7 @@ public class FirstApp extends RoboticsAPIApplication {
 	private Tool tool;
 	private ObjectFrame actTCP;
 	private CartesianImpedanceControlMode soft;
+	private BeckhoffIOIOGroup ios;
 
 
 	@Override
@@ -49,6 +55,27 @@ public class FirstApp extends RoboticsAPIApplication {
 
 	@Override
 	public void run() {
+		
+		ios = new BeckhoffIOIOGroup((Controller) getContext().getControllers().toArray()[0]);
+		
+		ICallbackAction getPositionAction = new ICallbackAction() {
+			@Override
+			public void onTriggerFired(IFiredTriggerInfo triggerinformation) {
+				ios.setOut1(true);
+				ios.setOut2(false);
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				ios.setOut1(false);
+				ios.setOut2(true);
+				
+			}
+			} ;
+
+
 		
 		soft = new CartesianImpedanceControlMode();
 		soft.parametrize(CartDOF.ALL).setDamping(.7);
@@ -80,7 +107,9 @@ public class FirstApp extends RoboticsAPIApplication {
 		
 		ForceCondition forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.Z, 5);
 
-		actTCP.move(lin(getApplicationData().getFrame("/P5")).setCartVelocity(6).breakWhen(forceDetected));
+		//actTCP.move(lin(getApplicationData().getFrame("/P5")).setCartVelocity(6).breakWhen(forceDetected));
+		actTCP.move(lin(getApplicationData().getFrame("/P5")).setCartVelocity(6).triggerWhen(forceDetected, getPositionAction));
+
 		
 		try {
 			Thread.sleep(1000);
@@ -98,4 +127,5 @@ public class FirstApp extends RoboticsAPIApplication {
 
 		
 	}
+	
 }
