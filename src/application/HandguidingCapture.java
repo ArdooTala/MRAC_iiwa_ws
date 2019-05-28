@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 import com.kuka.roboticsAPI.deviceModel.LBR;
+import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
+import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.motionModel.IMotionContainer;
 import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
 
@@ -31,12 +33,18 @@ import static com.kuka.roboticsAPI.motionModel.HRCMotions.*;
 public class HandguidingCapture extends RoboticsAPIApplication {
 	@Inject
 	private LBR lBR_iiwa_14_R820_1;
+	private Tool tool;
+	private ObjectFrame actTCP;
 
 	@Override
 	public void initialize() {
 		// initialize your application here
 		
-		IMotionContainer handle = lBR_iiwa_14_R820_1.moveAsync(handGuiding());
+		tool = createFromTemplate("IAACGripper");
+		tool.attachTo(lBR_iiwa_14_R820_1.getFlange());
+		actTCP = tool.getFrame("/TCP");
+		
+		IMotionContainer handle = actTCP.moveAsync(handGuiding());
 		
 		while (true){
 		int sel = getApplicationUI().displayModalDialog(
