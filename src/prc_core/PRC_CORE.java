@@ -151,43 +151,8 @@ public class PRC_CORE {
 		for (int i = 0; i < xmlout.prccommands.size(); i++) {
 			if (xmlout.prccommands.get(i).prccmdType == PRC_Enums.LIN || xmlout.prccommands.get(i).prccmdType == PRC_Enums.PTP || xmlout.prccommands.get(i).prccmdType == PRC_Enums.LINCOMP || xmlout.prccommands.get(i).prccmdType == PRC_Enums.PTPCOMP)
 			{
-				if ((i + 1 < xmlout.prccommands.size()) && (xmlout.prccommands.get(i + 1).prccmdType == PRC_Enums.LIN || xmlout.prccommands.get(i + 1).prccmdType == PRC_Enums.PTP || xmlout.prccommands.get(i + 1).prccmdType == PRC_Enums.LINCOMP || xmlout.prccommands.get(i + 1).prccmdType == PRC_Enums.PTPCOMP || xmlout.prccommands.get(i + 1).prccmdType == PRC_Enums.CIR))
-				{
-					motionbatchCMDs.add(xmlout.prccommands.get(i));
-					
-				}
-				else if (motionbatchCMDs.size() > 0){
-						motionbatchCMDs.add(xmlout.prccommands.get(i));
-						//add motionbatch to cmdsmod
-						PRC_CommandData cmdout = new PRC_CommandData();
-						cmdout.prccmdType = PRC_Enums.MBATCH;
-						cmdout.motionBatch = new PRC_MotionBatch();
-						
-						//finish motionbatch
-						
-						cmdout.motionBatch = CORE_RobotMotion(motionbatchCMDs, baseFrame, robot, true);
-						cmdsmod.add(cmdout);
-						motionbatchCMDs.clear();
-				}
-				else
-				{
-					cmdsmod.add(xmlout.prccommands.get(i));
-				}
+				cmdsmod.add(xmlout.prccommands.get(i));
 				
-				if (motionbatchCMDs.size() > mbsizelimit)
-				{
-					
-					//add motionbatch to cmdsmod
-					PRC_CommandData cmdout = new PRC_CommandData();
-					cmdout.prccmdType = PRC_Enums.MBATCH;
-					cmdout.motionBatch = new PRC_MotionBatch();
-					
-					//finish motionbatch
-					
-					cmdout.motionBatch = CORE_RobotMotion(motionbatchCMDs, baseFrame, robot, true);
-					cmdsmod.add(cmdout);
-					motionbatchCMDs.clear();
-				}
 				
 			}
 			else if (xmlout.prccommands.get(i).prccmdType == PRC_Enums.SPL)
