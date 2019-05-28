@@ -115,17 +115,13 @@ public class PRC_CORE {
 	private double ptpint = 0.0;
 	private double linacc = 1000;
 	private double ptpacc = 0.20;
-	PRC_IOGroupExtended digiogroup;
-	PRC_IOGroupExtended aniogroup;
+
 	
 	
 	
 	public void CORE_RUN(PRC_XMLOUT xmlout, LBR robot, Controller kuka_Sunrise_Cabinet_1, SpatialObject tool, String tcpname, ObjectFrame baseFrame, boolean enablelogging, ITaskLogger logger, MobilePlatform miiwa, IApplicationData AppData, MediaFlangeIOGroup ioGroup) {
 		
-		if (ioGroup != null){
-		digiogroup = new PRC_IOGroupExtended(ioGroup, kuka_Sunrise_Cabinet_1, PRC_Enums.DIGOUT);
-		aniogroup = new PRC_IOGroupExtended(ioGroup, kuka_Sunrise_Cabinet_1, PRC_Enums.ANOUT);
-		}
+
 		
 		
 		
@@ -340,9 +336,9 @@ public class PRC_CORE {
 					while (!motionContainers.get(motionContainers.size() - 1).isFinished())
 						ThreadUtil.milliSleep(50);
 					}
-					String returnstr = aniogroup.prc_SetAnalogIO(cmd.anOut.num, cmd.anOut.state);
+					//String returnstr = aniogroup.prc_SetAnalogIO(cmd.anOut.num, cmd.anOut.state);
 
-					if (enablelogging){logger.info(returnstr);}
+					//if (enablelogging){logger.info(returnstr);}
 				
 			} else if (cmd.prccmdType.equals(PRC_Enums.AXIS)){
 				
@@ -374,10 +370,10 @@ public class PRC_CORE {
 				while (!motionContainers.get(motionContainers.size() - 1).isFinished())
 					ThreadUtil.milliSleep(50);
 				}
-				String returnstr = digiogroup.prc_SetDigIO(cmd.digOut.num, cmd.digOut.state);
+				//String returnstr = digiogroup.prc_SetDigIO(cmd.digOut.num, cmd.digOut.state);
 
 				
-				if (enablelogging){logger.info(returnstr);}
+				//if (enablelogging){logger.info(returnstr);}
 				
 			} else if (cmd.prccmdType.equals(PRC_Enums.KMRMOVE)){
 				
