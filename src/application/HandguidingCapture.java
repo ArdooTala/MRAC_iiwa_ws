@@ -89,7 +89,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 			}
 			else if (sel == 1)
 			{
-				UDPInput.add(null);
+				UDPInput.add(new PRC_CommandData());
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
