@@ -71,7 +71,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 		UDPInput = new LinkedBlockingQueue<PRC_CommandData>();
 		
 		try {
-			udpsend = new UDPSender(InetAddress.getByName("171.31.1.149"), 49152, UDPInput);
+			udpsend = new UDPSender(InetAddress.getByName("172.31.1.149"), 49152, UDPInput);
 		} catch (SocketException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
