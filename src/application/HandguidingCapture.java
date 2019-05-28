@@ -58,6 +58,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 	@Override
 	public void run() {
 		
+		lBR_iiwa_14_R820_1.setESMState("2");
 		lBR_iiwa_14_R820_1.move(ptpHome());
 		
 		tool = createFromTemplate("IAACGripper");
@@ -84,7 +85,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 		//udpsend.start();
 		
 		lBR_iiwa_14_R820_1.setESMState("1");
-		IMotionContainer handle = lBR_iiwa_14_R820_1.move(handGuiding());
+		IMotionContainer handle = lBR_iiwa_14_R820_1.moveAsync(handGuiding());
 		
 		
 		
@@ -109,7 +110,8 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 				UDPInput.clear();
 			}
 		}
+		lBR_iiwa_14_R820_1.setESMState("2");
 		// your application execution starts here
-		
+		lBR_iiwa_14_R820_1.move(ptpHome());
 	}
 }
