@@ -74,7 +74,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 			UDPInput = new LinkedBlockingQueue<PRC_CommandData>();
 		}
 		
-		udpsend.start();
+		//udpsend.start();
 		
 		IMotionContainer handle = lBR_iiwa_14_R820_1.moveAsync(handGuiding());
 		
