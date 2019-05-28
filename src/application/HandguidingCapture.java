@@ -52,7 +52,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 	@Override
 	public void initialize() {
 		// initialize your application here
-
+		lBR_iiwa_14_R820_1.setESMState("1");
 	}
 
 	@Override
@@ -64,6 +64,8 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 		tool = createFromTemplate("IAACGripper");
 		tool.attachTo(lBR_iiwa_14_R820_1.getFlange());
 		actTCP = tool.getFrame("/TCP");
+		
+		UDPInput = new LinkedBlockingQueue<PRC_CommandData>();
 		
 		try {
 			udpsend = new UDPSender(InetAddress.getByName("171.31.1.149"), 49152, UDPInput);
@@ -79,7 +81,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 		{
 			udpsend.robot = lBR_iiwa_14_R820_1;
 			udpsend.toolframe = actTCP;
-			UDPInput = new LinkedBlockingQueue<PRC_CommandData>();
+			
 		}
 		
 		//udpsend.start();
