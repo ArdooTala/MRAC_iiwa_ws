@@ -6,6 +6,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -15,10 +16,12 @@ import threads.UDPSender;
 
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
+
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.motionModel.IMotionContainer;
+import com.kuka.roboticsAPI.motionModel.controlModeModel.JointImpedanceControlMode;
 import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
 
 import static com.kuka.roboticsAPI.motionModel.HRCMotions.*;
@@ -52,13 +55,13 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 	@Override
 	public void initialize() {
 		// initialize your application here
-		lBR_iiwa_14_R820_1.setESMState("1");
+		//lBR_iiwa_14_R820_1.setESMState("1");
 	}
 
 	@Override
 	public void run() {
 		
-		lBR_iiwa_14_R820_1.setESMState("1");
+		//lBR_iiwa_14_R820_1.setESMState("1");
 		lBR_iiwa_14_R820_1.move(ptpHome());
 		
 		tool = createFromTemplate("IAACGripper");
@@ -84,11 +87,16 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 			
 		}
 		
-		//udpsend.start();
+		udpsend.start();
 		
-		lBR_iiwa_14_R820_1.setESMState("2");
-		IMotionContainer handle = lBR_iiwa_14_R820_1.move(handGuiding());
+		//lBR_iiwa_14_R820_1.setESMState("2");
+		//IMotionContainer handle = lBR_iiwa_14_R820_1.move(handGuiding());
 		
+		JointImpedanceControlMode impMode = new JointImpedanceControlMode(1.0,
+				7.0, 7.0, 7.0, 7.0, 6.0, 1.0);
+		IMotionContainer handle;
+		handle = actTCP.moveAsync(positionHold(impMode, -1,
+				TimeUnit.SECONDS));
 		
 		
 		while (true){
@@ -112,7 +120,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 				UDPInput.clear();
 			}
 		}
-		lBR_iiwa_14_R820_1.setESMState("1");
+		//lBR_iiwa_14_R820_1.setESMState("1");
 		// your application execution starts here
 		lBR_iiwa_14_R820_1.move(ptpHome());
 	}
