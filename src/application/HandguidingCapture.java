@@ -112,7 +112,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 			{
 				UDPInput.add(new PRC_CommandData());
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(10000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -123,5 +123,11 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 		//lBR_iiwa_14_R820_1.setESMState("1");
 		// your application execution starts here
 		lBR_iiwa_14_R820_1.move(ptpHome());
+	}
+	
+	@Override
+	public void dispose() {
+		udpsend.dispose();
+		super.dispose();
 	}
 }
