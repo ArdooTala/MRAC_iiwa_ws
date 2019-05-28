@@ -67,7 +67,7 @@ public class PRC_RunSmartServo extends RoboticsAPIApplication {
 	@Override
 	public void run() {
 		LBR robot = lbr_iiwa; //SET ROBOT
-		String toolname = "Tool"; //SET TOOL NAME
+		String toolname = "IAACGripper"; //SET TOOL NAME
 		String tcpname = "TCP"; //SET TCP NAME
 		ObjectFrame baseFrame = getApplicationData().getFrame("/BASE1"); //OPTIONAL: SET BASE COORDINATE SYSTEM
 		boolean enablellogging = true; //OPTIONAL: ENABLE CONSOLE LOGGING
