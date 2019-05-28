@@ -1,7 +1,17 @@
 package application;
 
 
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.concurrent.BlockingQueue;
+
 import javax.inject.Inject;
+
+import prc_classes.PRC_CommandData;
+
+import threads.UDPSender;
+
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 import com.kuka.roboticsAPI.deviceModel.LBR;
@@ -35,6 +45,8 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 	private LBR lBR_iiwa_14_R820_1;
 	private Tool tool;
 	private ObjectFrame actTCP;
+	UDPSender udpsend;
+	BlockingQueue<PRC_CommandData> UDPInput;
 
 	@Override
 	public void initialize() {
@@ -44,19 +56,48 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 		tool.attachTo(lBR_iiwa_14_R820_1.getFlange());
 		actTCP = tool.getFrame("/TCP");
 		
-		IMotionContainer handle = actTCP.moveAsync(handGuiding());
+		try {
+			udpsend = new UDPSender(InetAddress.getByName("171.31.1.149"), 49152, UDPInput);
+		} catch (SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (lBR_iiwa_14_R820_1 != null)
+		{
+			udpsend.robot = lBR_iiwa_14_R820_1;
+			udpsend.toolframe = actTCP;
+		}
+		
+		udpsend.start();
+		
+		IMotionContainer handle = lBR_iiwa_14_R820_1.moveAsync(handGuiding());
+		
+		
 		
 		while (true){
-		int sel = getApplicationUI().displayModalDialog(
-				ApplicationDialogType.QUESTION, "Stop Handguiding", "STOP");
-
-				switch (sel) {
-				case 0:
-				handle.cancel();
-				break;
-				default:
-				//do default
-		}
+			int sel = getApplicationUI().displayModalDialog(
+					ApplicationDialogType.QUESTION, "Stop Handguiding", "STOP", "CAPTURE");
+	
+			if (sel == 0)
+			{
+					handle.cancel();
+					break;
+			}
+			else if (sel == 1)
+			{
+				UDPInput.add(null);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				UDPInput.clear();
+			}
 		}
 	}
 
