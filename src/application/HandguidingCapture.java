@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.inject.Inject;
 
@@ -70,6 +71,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 		{
 			udpsend.robot = lBR_iiwa_14_R820_1;
 			udpsend.toolframe = actTCP;
+			UDPInput = new LinkedBlockingQueue<PRC_CommandData>();
 		}
 		
 		udpsend.start();
