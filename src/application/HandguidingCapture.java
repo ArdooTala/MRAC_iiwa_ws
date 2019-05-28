@@ -95,7 +95,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 		JointImpedanceControlMode impMode = new JointImpedanceControlMode(1.0,
 				7.0, 7.0, 7.0, 7.0, 6.0, 1.0);
 		IMotionContainer handle;
-		handle = actTCP.moveAsync(positionHold(impMode, -1,
+		handle = lBR_iiwa_14_R820_1.moveAsync(positionHold(impMode, -1,
 				TimeUnit.SECONDS));
 		
 		
