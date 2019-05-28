@@ -85,7 +85,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 		//udpsend.start();
 		
 		lBR_iiwa_14_R820_1.setESMState("2");
-		IMotionContainer handle = lBR_iiwa_14_R820_1.moveAsync(handGuiding());
+		IMotionContainer handle = lBR_iiwa_14_R820_1.move(handGuiding());
 		
 		
 		
