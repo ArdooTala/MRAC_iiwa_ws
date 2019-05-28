@@ -19,7 +19,9 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import com.kuka.common.ThreadUtil;
+import com.kuka.generated.ioAccess.MediaFlangeIOGroup;
 import com.kuka.roboticsAPI.applicationModel.IApplicationData;
+import com.kuka.roboticsAPI.conditionModel.ForceCondition;
 import com.kuka.roboticsAPI.controllerModel.Controller;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy;
@@ -29,6 +31,7 @@ import com.kuka.roboticsAPI.geometricModel.AbstractFrame;
 import com.kuka.roboticsAPI.geometricModel.CartDOF;
 import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.SpatialObject;
+import com.kuka.roboticsAPI.geometricModel.math.CoordinateAxis;
 import com.kuka.roboticsAPI.geometricModel.math.XyzAbcTransformation;
 import com.kuka.roboticsAPI.geometricModel.redundancy.AbstractRedundancyCollection;
 import com.kuka.roboticsAPI.geometricModel.redundancy.IRedundancyCollection;
@@ -117,7 +120,7 @@ public class PRC_CORE {
 	
 	
 	
-	public void CORE_RUN(PRC_XMLOUT xmlout, LBR robot, Controller kuka_Sunrise_Cabinet_1, SpatialObject tool, String tcpname, ObjectFrame baseFrame, boolean enablelogging, ITaskLogger logger, MobilePlatform miiwa, IApplicationData AppData, AbstractIOGroup ioGroup) {
+	public void CORE_RUN(PRC_XMLOUT xmlout, LBR robot, Controller kuka_Sunrise_Cabinet_1, SpatialObject tool, String tcpname, ObjectFrame baseFrame, boolean enablelogging, ITaskLogger logger, MobilePlatform miiwa, IApplicationData AppData, MediaFlangeIOGroup ioGroup) {
 		
 		if (ioGroup != null){
 		digiogroup = new PRC_IOGroupExtended(ioGroup, kuka_Sunrise_Cabinet_1, PRC_Enums.DIGOUT);
@@ -453,7 +456,17 @@ public class PRC_CORE {
 				
 				if (cmd.linCompMove.interpolation == "")
 				{
-					actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(ImpedanceControl));
+					ForceCondition forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.X, 5);
+
+					actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(ImpedanceControl).breakWhen(forceDetected));
+					ioGroup.setOutput1(true);
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					ioGroup.setOutput1(false);
 				}
 				else
 				{
