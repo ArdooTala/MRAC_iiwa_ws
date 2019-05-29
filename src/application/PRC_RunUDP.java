@@ -17,6 +17,7 @@ import prc_core.PRC_UDP;
 
 
 
+import com.kuka.generated.ioAccess.BeckhoffIOIOGroup;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import com.kuka.roboticsAPI.controllerModel.Controller;
 import com.kuka.roboticsAPI.deviceModel.LBR;
@@ -70,11 +71,11 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 		String tcpname = "TCP"; //SET TCP NAME
 		ObjectFrame baseFrame = getApplicationData().getFrame("/BASE1"); //OPTIONAL: SET BASE COORDINATE SYSTEM
 		boolean enablellogging = true; //OPTIONAL: ENABLE CONSOLE LOGGING
-		//Beckhoff_OUTIOGroup iogrp = new Beckhoff_OUTIOGroup(kuka_Sunrise_Cabinet_1);
+		BeckhoffIOIOGroup iogrp = new BeckhoffIOIOGroup(kuka_Sunrise_Cabinet_1);
 		//AbstractIOGroup iogrp = iogrp;
 		
 		try {
-			prc_udp.CORE_UDP(robot, kuka_Sunrise_Cabinet_1, getApplicationData().createFromTemplate(toolname), tcpname, baseFrame, enablellogging, getLogger(), getApplicationData(), null, "172.31.1.149", 49152);
+			prc_udp.CORE_UDP(robot, kuka_Sunrise_Cabinet_1, getApplicationData().createFromTemplate(toolname), tcpname, baseFrame, enablellogging, getLogger(), getApplicationData(), iogrp, "172.31.1.149", 49152);
 		} catch (SocketException e) {
 			// TODO Automatisch generierter Erfassungsblock
 			e.printStackTrace();
