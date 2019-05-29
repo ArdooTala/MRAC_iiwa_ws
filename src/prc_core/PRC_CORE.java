@@ -19,9 +19,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import com.kuka.common.ThreadUtil;
-import com.kuka.generated.ioAccess.MediaFlangeIOGroup;
 import com.kuka.roboticsAPI.applicationModel.IApplicationData;
-import com.kuka.roboticsAPI.conditionModel.ForceCondition;
 import com.kuka.roboticsAPI.controllerModel.Controller;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy;
@@ -31,7 +29,6 @@ import com.kuka.roboticsAPI.geometricModel.AbstractFrame;
 import com.kuka.roboticsAPI.geometricModel.CartDOF;
 import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.SpatialObject;
-import com.kuka.roboticsAPI.geometricModel.math.CoordinateAxis;
 import com.kuka.roboticsAPI.geometricModel.math.XyzAbcTransformation;
 import com.kuka.roboticsAPI.geometricModel.redundancy.AbstractRedundancyCollection;
 import com.kuka.roboticsAPI.geometricModel.redundancy.IRedundancyCollection;
@@ -115,13 +112,17 @@ public class PRC_CORE {
 	private double ptpint = 0.0;
 	private double linacc = 1000;
 	private double ptpacc = 0.20;
-
+	PRC_IOGroupExtended digiogroup;
+	PRC_IOGroupExtended aniogroup;
 	
 	
 	
-	public void CORE_RUN(PRC_XMLOUT xmlout, LBR robot, Controller kuka_Sunrise_Cabinet_1, SpatialObject tool, String tcpname, ObjectFrame baseFrame, boolean enablelogging, ITaskLogger logger, MobilePlatform miiwa, IApplicationData AppData, MediaFlangeIOGroup ioGroup) {
+	public void CORE_RUN(PRC_XMLOUT xmlout, LBR robot, Controller kuka_Sunrise_Cabinet_1, SpatialObject tool, String tcpname, ObjectFrame baseFrame, boolean enablelogging, ITaskLogger logger, MobilePlatform miiwa, IApplicationData AppData, AbstractIOGroup ioGroup) {
 		
-
+		if (ioGroup != null){
+		digiogroup = new PRC_IOGroupExtended(ioGroup, kuka_Sunrise_Cabinet_1, PRC_Enums.DIGOUT);
+		aniogroup = new PRC_IOGroupExtended(ioGroup, kuka_Sunrise_Cabinet_1, PRC_Enums.ANOUT);
+		}
 		
 		
 		
@@ -151,8 +152,43 @@ public class PRC_CORE {
 		for (int i = 0; i < xmlout.prccommands.size(); i++) {
 			if (xmlout.prccommands.get(i).prccmdType == PRC_Enums.LIN || xmlout.prccommands.get(i).prccmdType == PRC_Enums.PTP || xmlout.prccommands.get(i).prccmdType == PRC_Enums.LINCOMP || xmlout.prccommands.get(i).prccmdType == PRC_Enums.PTPCOMP)
 			{
-				cmdsmod.add(xmlout.prccommands.get(i));
+				if ((i + 1 < xmlout.prccommands.size()) && (xmlout.prccommands.get(i + 1).prccmdType == PRC_Enums.LIN || xmlout.prccommands.get(i + 1).prccmdType == PRC_Enums.PTP || xmlout.prccommands.get(i + 1).prccmdType == PRC_Enums.LINCOMP || xmlout.prccommands.get(i + 1).prccmdType == PRC_Enums.PTPCOMP || xmlout.prccommands.get(i + 1).prccmdType == PRC_Enums.CIR))
+				{
+					motionbatchCMDs.add(xmlout.prccommands.get(i));
+					
+				}
+				else if (motionbatchCMDs.size() > 0){
+						motionbatchCMDs.add(xmlout.prccommands.get(i));
+						//add motionbatch to cmdsmod
+						PRC_CommandData cmdout = new PRC_CommandData();
+						cmdout.prccmdType = PRC_Enums.MBATCH;
+						cmdout.motionBatch = new PRC_MotionBatch();
+						
+						//finish motionbatch
+						
+						cmdout.motionBatch = CORE_RobotMotion(motionbatchCMDs, baseFrame, robot, true);
+						cmdsmod.add(cmdout);
+						motionbatchCMDs.clear();
+				}
+				else
+				{
+					cmdsmod.add(xmlout.prccommands.get(i));
+				}
 				
+				if (motionbatchCMDs.size() > mbsizelimit)
+				{
+					
+					//add motionbatch to cmdsmod
+					PRC_CommandData cmdout = new PRC_CommandData();
+					cmdout.prccmdType = PRC_Enums.MBATCH;
+					cmdout.motionBatch = new PRC_MotionBatch();
+					
+					//finish motionbatch
+					
+					cmdout.motionBatch = CORE_RobotMotion(motionbatchCMDs, baseFrame, robot, true);
+					cmdsmod.add(cmdout);
+					motionbatchCMDs.clear();
+				}
 				
 			}
 			else if (xmlout.prccommands.get(i).prccmdType == PRC_Enums.SPL)
@@ -301,9 +337,9 @@ public class PRC_CORE {
 					while (!motionContainers.get(motionContainers.size() - 1).isFinished())
 						ThreadUtil.milliSleep(50);
 					}
-					//String returnstr = aniogroup.prc_SetAnalogIO(cmd.anOut.num, cmd.anOut.state);
+					String returnstr = aniogroup.prc_SetAnalogIO(cmd.anOut.num, cmd.anOut.state);
 
-					//if (enablelogging){logger.info(returnstr);}
+					if (enablelogging){logger.info(returnstr);}
 				
 			} else if (cmd.prccmdType.equals(PRC_Enums.AXIS)){
 				
@@ -335,10 +371,10 @@ public class PRC_CORE {
 				while (!motionContainers.get(motionContainers.size() - 1).isFinished())
 					ThreadUtil.milliSleep(50);
 				}
-				//String returnstr = digiogroup.prc_SetDigIO(cmd.digOut.num, cmd.digOut.state);
+				String returnstr = digiogroup.prc_SetDigIO(cmd.digOut.num, cmd.digOut.state);
 
 				
-				//if (enablelogging){logger.info(returnstr);}
+				if (enablelogging){logger.info(returnstr);}
 				
 			} else if (cmd.prccmdType.equals(PRC_Enums.KMRMOVE)){
 				
@@ -417,17 +453,7 @@ public class PRC_CORE {
 				
 				if (cmd.linCompMove.interpolation == "")
 				{
-					ForceCondition forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.X, 5);
-
-					actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(ImpedanceControl).breakWhen(forceDetected));
-					ioGroup.setOutput1(true);
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					ioGroup.setOutput1(false);
+					actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(ImpedanceControl));
 				}
 				else
 				{

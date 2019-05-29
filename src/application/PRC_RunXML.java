@@ -12,7 +12,7 @@ import java.util.Arrays;
 import prc_classes.PRC_XMLOUT;
 import prc_core.PRC_CORE;
 
-import com.kuka.generated.ioAccess.MediaFlangeIOGroup;
+import com.kuka.generated.ioAccess.BeckhoffIOIOGroup;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import com.kuka.roboticsAPI.controllerModel.Controller;
 import com.kuka.roboticsAPI.deviceModel.LBR;
@@ -63,7 +63,7 @@ public class PRC_RunXML extends RoboticsAPIApplication {
 		String tcpname = "TCP"; //SET TCP NAME
 		ObjectFrame baseFrame = getApplicationData().getFrame("/BASE1"); //OPTIONAL: SET BASE COORDINATE SYSTEM
 		boolean enablellogging = true; //OPTIONAL: ENABLE CONSOLE LOGGING
-		MediaFlangeIOGroup iogrp = new MediaFlangeIOGroup(kuka_Sunrise_Cabinet_1);
+		BeckhoffIOIOGroup iogrp = new BeckhoffIOIOGroup(kuka_Sunrise_Cabinet_1);
 		//AbstractIOGroup iogrp = iogrp;
 		
 		PRC_CORE prc_Core = new PRC_CORE();

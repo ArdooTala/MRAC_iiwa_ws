@@ -87,7 +87,6 @@ public class PRC_SaxHandler extends DefaultHandler {
     			currCMD.splPart.frame = currFrame;
     			currCMD.splPart.vel = currCartVEL;
     		} 
-    		
     		prccmds.add(currCMD);
         	currCMD = new PRC_CommandData();
         } else if("BASE".equals(qName)){
