@@ -367,12 +367,12 @@ private AbstractFrame PRC_SetRedundancy(LBR robot, PRC_CommandData cmd) {
 			else {
 				LBRE1Redundancy e1val = new LBRE1Redundancy();
 				e1val.setE1(cmd.ptpCompMove.e1val);
-				if (cmd.ptpMove.status.length() == 1){
-					e1val.setStatus(Integer.parseInt(cmd.ptpMove.status));
+				if (cmd.ptpCompMove.status.length() == 1){
+					e1val.setStatus(Integer.parseInt(cmd.ptpCompMove.status));
 				}
 				else
 				{
-					e1val.setStatus(Integer.parseInt(cmd.ptpMove.status, 2));
+					e1val.setStatus(Integer.parseInt(cmd.ptpCompMove.status, 2));
 				}
 				frm.setRedundancyInformation(robot, e1val);
 			}
