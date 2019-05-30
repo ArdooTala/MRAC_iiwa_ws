@@ -5,7 +5,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.text.DecimalFormat;
 import java.util.concurrent.BlockingQueue;
 
@@ -45,16 +44,9 @@ public class UDPSender extends Thread {
         	String data = CollectPayload(robot, toolframe);
         	buf = data.getBytes();
         	DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
-        	DatagramPacket packet2 = null;
-        	try {
-				packet2 = new DatagramPacket(buf, buf.length, InetAddress.getByName("172.31.1.150"), port);
-			} catch (UnknownHostException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+
             try {
 				socket.send(packet);
-				socket.send(packet2);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

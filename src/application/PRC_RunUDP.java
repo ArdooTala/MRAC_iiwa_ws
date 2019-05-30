@@ -11,16 +11,12 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.print.attribute.standard.Media;
-
 import prc_classes.PRC_XMLOUT;
 import prc_core.PRC_CORE;
 import prc_core.PRC_UDP;
 
 
 
-import com.kuka.generated.ioAccess.BeckhoffIOIOGroup;
-import com.kuka.generated.ioAccess.MediaFlangeIOGroup;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import com.kuka.roboticsAPI.controllerModel.Controller;
 import com.kuka.roboticsAPI.deviceModel.LBR;
@@ -70,15 +66,15 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 	@Override
 	public void run() {
 		LBR robot = lbr_iiwa; //SET ROBOT
-		String toolname = "IAACGripper"; //SET TOOL NAME
+		String toolname = "PolierVib"; //SET TOOL NAME
 		String tcpname = "TCP"; //SET TCP NAME
-		ObjectFrame baseFrame = getApplicationData().getFrame("/BASE1"); //OPTIONAL: SET BASE COORDINATE SYSTEM
+		ObjectFrame baseFrame = getApplicationData().getFrame("/HaringBase"); //OPTIONAL: SET BASE COORDINATE SYSTEM
 		boolean enablellogging = true; //OPTIONAL: ENABLE CONSOLE LOGGING
-		MediaFlangeIOGroup iogrp = new MediaFlangeIOGroup(kuka_Sunrise_Cabinet_1);
+		//Beckhoff_OUTIOGroup iogrp = new Beckhoff_OUTIOGroup(kuka_Sunrise_Cabinet_1);
 		//AbstractIOGroup iogrp = iogrp;
 		
 		try {
-			prc_udp.CORE_UDP(robot, kuka_Sunrise_Cabinet_1, getApplicationData().createFromTemplate(toolname), tcpname, baseFrame, enablellogging, getLogger(), getApplicationData(), iogrp, "172.31.1.149", 49152);
+			prc_udp.CORE_UDP(robot, kuka_Sunrise_Cabinet_1, getApplicationData().createFromTemplate(toolname), tcpname, baseFrame, enablellogging, getLogger(), getApplicationData(), null, "172.31.1.148", 49152);
 		} catch (SocketException e) {
 			// TODO Automatisch generierter Erfassungsblock
 			e.printStackTrace();

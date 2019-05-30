@@ -1,7 +1,6 @@
 package prc_core;
 
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.lin;
-import static com.kuka.roboticsAPI.motionModel.BasicMotions.positionHold;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.ptp;
 
 import java.net.InetAddress;
@@ -10,7 +9,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 import prc_classes.PRC_CommandData;
 import prc_classes.PRC_Enums;
@@ -21,26 +19,19 @@ import threads.UDPReceiver;
 import threads.UDPSender;
 
 import com.kuka.common.ThreadUtil;
-import com.kuka.generated.ioAccess.BeckhoffIOIOGroup;
-import com.kuka.generated.ioAccess.MediaFlangeIOGroup;
 import com.kuka.roboticsAPI.applicationModel.IApplicationData;
-import com.kuka.roboticsAPI.conditionModel.ForceCondition;
 import com.kuka.roboticsAPI.controllerModel.Controller;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy;
 import com.kuka.roboticsAPI.geometricModel.AbstractFrame;
 import com.kuka.roboticsAPI.geometricModel.CartDOF;
-import com.kuka.roboticsAPI.geometricModel.CartPlane;
 import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.SpatialObject;
-import com.kuka.roboticsAPI.geometricModel.math.CoordinateAxis;
 import com.kuka.roboticsAPI.geometricModel.math.XyzAbcTransformation;
 import com.kuka.roboticsAPI.ioModel.AbstractIOGroup;
 import com.kuka.roboticsAPI.motionModel.CIRC;
 import com.kuka.roboticsAPI.motionModel.IMotionContainer;
-import com.kuka.roboticsAPI.motionModel.PositionHold;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
-import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianSineImpedanceControlMode;
 import com.kuka.task.ITaskLogger;
 
 public class PRC_UDP {
@@ -52,7 +43,7 @@ public class PRC_UDP {
 	PRC_IOGroupExtended digiogroup;
 	PRC_IOGroupExtended aniogroup;
 	
-	public void CORE_UDP(LBR robot, Controller kuka_Sunrise_Cabinet_1, SpatialObject tool, String tcpname, ObjectFrame baseFrame, boolean enablelogging, ITaskLogger logger, IApplicationData AppData, MediaFlangeIOGroup ioGroup, String ip, int port) throws SocketException, UnknownHostException {
+	public void CORE_UDP(LBR robot, Controller kuka_Sunrise_Cabinet_1, SpatialObject tool, String tcpname, ObjectFrame baseFrame, boolean enablelogging, ITaskLogger logger, IApplicationData AppData, AbstractIOGroup ioGroup, String ip, int port) throws SocketException, UnknownHostException {
 	
 		//movement parameters
 		double ptpacc = 1.0;
@@ -102,9 +93,9 @@ public class PRC_UDP {
 			
 			for (PRC_CommandData cmd : udpcmds) {
 				
-				if (k>5)
+				if (k>3)
 				{
-					while (!motionContainers.get(k-5).isFinished())
+					while (!motionContainers.get(k-3).isFinished())
 						ThreadUtil.milliSleep(50);
 				}
 				
@@ -198,7 +189,7 @@ public class PRC_UDP {
 					
 					frm = PRC_SetRedundancy(robot, cmd);
 					
-					if (cmd.linMove.interpolation != "C_DIS")
+					if (cmd.linMove.interpolation == "" || cmd.linMove.interpolation == " ")
 					{
 						actTCP.move(lin(cmd.linMove.frame).setCartVelocity(cmd.linMove.vel).setCartAcceleration(linacc));
 					}
@@ -219,36 +210,26 @@ public class PRC_UDP {
 					
 					frm = PRC_SetRedundancy(robot, cmd);
 					
-					CartesianImpedanceControlMode soft = new CartesianImpedanceControlMode();
-					soft.parametrize(CartDOF.ALL).setDamping(.7);
-					soft.parametrize(CartDOF.ROT).setStiffness(300);
-					soft.parametrize(CartDOF.TRANSL).setStiffness(3000);
-					soft.parametrize(CartDOF.X).setStiffness(200);
+					CartesianImpedanceControlMode ImpedanceControl = new CartesianImpedanceControlMode();
+					ImpedanceControl.parametrize(CartDOF.ALL).setDamping(0.7);
+					ImpedanceControl.parametrize(CartDOF.X).setStiffness(cmd.linCompMove.stiffX).setAdditionalControlForce(cmd.linCompMove.addFX);
+					ImpedanceControl.parametrize(CartDOF.Y).setStiffness(cmd.linCompMove.stiffY).setAdditionalControlForce(cmd.linCompMove.addFY);
+					ImpedanceControl.parametrize(CartDOF.Z).setStiffness(cmd.linCompMove.stiffZ).setAdditionalControlForce(cmd.linCompMove.addFZ);
+					ImpedanceControl.parametrize(CartDOF.ROT).setStiffness(300);
 					
-					CartesianImpedanceControlMode hard = new CartesianImpedanceControlMode();
-					hard.parametrize(CartDOF.ALL).setDamping(.7);
-					hard.parametrize(CartDOF.ROT).setStiffness(300);
-					hard.parametrize(CartDOF.TRANSL).setStiffness(5000);
 					
-					ForceCondition forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.X, 7);
-
-					
-					if (cmd.linCompMove.interpolation != "C_DIS")
+					if (cmd.linCompMove.interpolation == "" || cmd.linMove.interpolation == " ")
 					{
-						actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(soft).breakWhen(forceDetected));
-						actTCP.move(positionHold(hard, 10, TimeUnit.MILLISECONDS));
-						ioGroup.setOutput1(true);
-						actTCP.move(positionHold(hard, 500, TimeUnit.MILLISECONDS));
-						ioGroup.setOutput1(false);
+						actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(ImpedanceControl));
 					}
 					else
 					{
-						IMotionContainer mc = actTCP.moveAsync(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setBlendingCart(linint).setCartAcceleration(linacc).setMode(soft));
+						IMotionContainer mc = actTCP.moveAsync(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setBlendingCart(linint).setCartAcceleration(linacc).setMode(ImpedanceControl));
 						motionContainers.add(mc);
 						k++;
 					}
 
-					if (enablelogging){logger.info(cmd.linCompMove.ToString());}
+					if (enablelogging){logger.info(cmd.linMove.ToString());}
 				} else if (cmd.prccmdType.equals(PRC_Enums.PTP)){
 					if (baseFrame != null)
 					{
@@ -281,9 +262,9 @@ public class PRC_UDP {
 					
 					CartesianImpedanceControlMode ImpedanceControl = new CartesianImpedanceControlMode();
 					ImpedanceControl.parametrize(CartDOF.ALL).setDamping(0.7);
-					ImpedanceControl.parametrize(CartDOF.X).setStiffness(cmd.ptpCompMove.stiffX).setAdditionalControlForce(cmd.ptpCompMove.addFX);
-					ImpedanceControl.parametrize(CartDOF.Y).setStiffness(cmd.ptpCompMove.stiffY).setAdditionalControlForce(cmd.ptpCompMove.addFY);
-					ImpedanceControl.parametrize(CartDOF.Z).setStiffness(cmd.ptpCompMove.stiffZ).setAdditionalControlForce(cmd.ptpCompMove.addFZ);
+					ImpedanceControl.parametrize(CartDOF.X).setStiffness(cmd.linCompMove.stiffX).setAdditionalControlForce(cmd.linCompMove.addFX);
+					ImpedanceControl.parametrize(CartDOF.Y).setStiffness(cmd.linCompMove.stiffY).setAdditionalControlForce(cmd.linCompMove.addFY);
+					ImpedanceControl.parametrize(CartDOF.Z).setStiffness(cmd.linCompMove.stiffZ).setAdditionalControlForce(cmd.linCompMove.addFZ);
 					ImpedanceControl.parametrize(CartDOF.ROT).setStiffness(300);
 
 					if (cmd.ptpCompMove.interpolation == "" || cmd.ptpCompMove.interpolation == " ")
@@ -338,7 +319,6 @@ public class PRC_UDP {
 	}
 	
 	public void dispose(){
-		UDPInput.clear();
 		udprec.dispose();
 		udpsend.dispose();
 	}
@@ -355,13 +335,7 @@ private AbstractFrame PRC_SetRedundancy(LBR robot, PRC_CommandData cmd) {
 			else {
 				LBRE1Redundancy e1val = new LBRE1Redundancy();
 				e1val.setE1(cmd.ptpMove.e1val);
-				if (cmd.ptpMove.status.length() == 1){
-					e1val.setStatus(Integer.parseInt(cmd.ptpMove.status));
-				}
-				else
-				{
-					e1val.setStatus(Integer.parseInt(cmd.ptpMove.status, 2));
-				}
+				e1val.setStatus(Integer.parseInt(cmd.ptpMove.status, 2));
 				frm.setRedundancyInformation(robot, e1val);
 			}
 			return frm;
@@ -376,13 +350,7 @@ private AbstractFrame PRC_SetRedundancy(LBR robot, PRC_CommandData cmd) {
 			else {
 				LBRE1Redundancy e1val = new LBRE1Redundancy();
 				e1val.setE1(cmd.ptpCompMove.e1val);
-				if (cmd.ptpCompMove.status.length() == 1){
-					e1val.setStatus(Integer.parseInt(cmd.ptpCompMove.status));
-				}
-				else
-				{
-					e1val.setStatus(Integer.parseInt(cmd.ptpCompMove.status, 2));
-				}
+				e1val.setStatus(Integer.parseInt(cmd.ptpCompMove.status, 2));
 				frm.setRedundancyInformation(robot, e1val);
 			}
 			return frm;
