@@ -11,6 +11,8 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.print.attribute.standard.Media;
+
 import prc_classes.PRC_XMLOUT;
 import prc_core.PRC_CORE;
 import prc_core.PRC_UDP;
@@ -72,7 +74,7 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 		String tcpname = "TCP"; //SET TCP NAME
 		ObjectFrame baseFrame = getApplicationData().getFrame("/BASE1"); //OPTIONAL: SET BASE COORDINATE SYSTEM
 		boolean enablellogging = true; //OPTIONAL: ENABLE CONSOLE LOGGING
-		BeckhoffIOIOGroup iogrp = new BeckhoffIOIOGroup(kuka_Sunrise_Cabinet_1);
+		MediaFlangeIOGroup iogrp = new MediaFlangeIOGroup(kuka_Sunrise_Cabinet_1);
 		//AbstractIOGroup iogrp = iogrp;
 		
 		try {
