@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import com.kuka.connectivity.motionModel.smartServoLIN.ISmartServoLINRuntime;
 import com.kuka.connectivity.motionModel.smartServoLIN.SmartServoLIN;
+import com.kuka.generated.ioAccess.BeckhoffIOGroup;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 
@@ -66,6 +67,8 @@ public class Scan_Pick extends RoboticsAPIApplication {
     private byte[] buf = new byte[65508];
     
     ISmartServoLINRuntime _smartServoLINRuntime = null;
+    
+    BeckhoffIOGroup io;
 	
 	@Override
 	public void initialize() {
@@ -79,6 +82,8 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		// initialize your application here
 		kuka_Sunrise_Cabinet_1 = (Controller) getContext().getControllers().toArray()[0];
 		iiwa_14 = (LBR) kuka_Sunrise_Cabinet_1.getDevices().toArray()[0];
+		
+		io = new BeckhoffIOGroup(kuka_Sunrise_Cabinet_1);
 		
 		//create tool and TCP
 		tool = createFromTemplate("SCGripper");
@@ -236,7 +241,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		frm.setZ(Double.parseDouble(pick_location[3]) - 30);
 		actTCP.move(lin(frm).breakWhen(forceDetected));
 		
-		// TODO: turn on gripper;
+		io.setOut1(true);
 		
 		iiwa_14.move(positionHold(force , 3 , TimeUnit. SECONDS ));
 		
@@ -245,6 +250,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	}
 	
     public void dispose(){
+    	io.setOut1(false);
     	running=false;
     	socket.close();
     }
