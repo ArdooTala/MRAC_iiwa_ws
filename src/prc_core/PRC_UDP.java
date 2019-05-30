@@ -1,6 +1,7 @@
 package prc_core;
 
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.lin;
+import static com.kuka.roboticsAPI.motionModel.BasicMotions.positionHold;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.ptp;
 
 import java.net.InetAddress;
@@ -9,6 +10,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import prc_classes.PRC_CommandData;
 import prc_classes.PRC_Enums;
@@ -20,18 +22,23 @@ import threads.UDPSender;
 
 import com.kuka.common.ThreadUtil;
 import com.kuka.roboticsAPI.applicationModel.IApplicationData;
+import com.kuka.roboticsAPI.conditionModel.ForceCondition;
 import com.kuka.roboticsAPI.controllerModel.Controller;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy;
 import com.kuka.roboticsAPI.geometricModel.AbstractFrame;
 import com.kuka.roboticsAPI.geometricModel.CartDOF;
+import com.kuka.roboticsAPI.geometricModel.CartPlane;
 import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.SpatialObject;
+import com.kuka.roboticsAPI.geometricModel.math.CoordinateAxis;
 import com.kuka.roboticsAPI.geometricModel.math.XyzAbcTransformation;
 import com.kuka.roboticsAPI.ioModel.AbstractIOGroup;
 import com.kuka.roboticsAPI.motionModel.CIRC;
 import com.kuka.roboticsAPI.motionModel.IMotionContainer;
+import com.kuka.roboticsAPI.motionModel.PositionHold;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
+import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianSineImpedanceControlMode;
 import com.kuka.task.ITaskLogger;
 
 public class PRC_UDP {
@@ -210,32 +217,22 @@ public class PRC_UDP {
 					
 					frm = PRC_SetRedundancy(robot, cmd);
 					
-					CartesianImpedanceControlMode ImpedanceControl = new CartesianImpedanceControlMode();
-					ImpedanceControl.parametrize(CartDOF.ALL).setDamping(0.7);
+					CartesianSineImpedanceControlMode shakeSpirale;
+					shakeSpirale = CartesianSineImpedanceControlMode.createSpiralPattern(
+							CartPlane.XY, 15, 16, 1000, 180);
+					shakeSpirale.setRiseTime(0.2).setHoldTime(60).setFallTime(0.5);
 					
-					if (cmd.linCompMove.addFX + cmd.linCompMove.addFY + cmd.linCompMove.addFZ != 0)
-					{
-					ImpedanceControl.parametrize(CartDOF.X).setStiffness(cmd.linCompMove.stiffX).setAdditionalControlForce(cmd.linCompMove.addFX);
-					ImpedanceControl.parametrize(CartDOF.Y).setStiffness(cmd.linCompMove.stiffY).setAdditionalControlForce(cmd.linCompMove.addFY);
-					ImpedanceControl.parametrize(CartDOF.Z).setStiffness(cmd.linCompMove.stiffZ).setAdditionalControlForce(cmd.linCompMove.addFZ);
-					}
-					else
-					{
-						ImpedanceControl.parametrize(CartDOF.X).setStiffness(cmd.linCompMove.stiffX);
-						ImpedanceControl.parametrize(CartDOF.Y).setStiffness(cmd.linCompMove.stiffY);
-						ImpedanceControl.parametrize(CartDOF.Z).setStiffness(cmd.linCompMove.stiffZ);
-					}
-					
-					ImpedanceControl.parametrize(CartDOF.ROT).setStiffness(300);
-					
+					ForceCondition forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.X, 5);
+
 					
 					if (cmd.linCompMove.interpolation == "" || cmd.linCompMove.interpolation == " ")
 					{
-						actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(ImpedanceControl));
+						actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).breakWhen(forceDetected));
+						actTCP.move(positionHold(shakeSpirale, 500, TimeUnit.MILLISECONDS));
 					}
 					else
 					{
-						IMotionContainer mc = actTCP.moveAsync(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setBlendingCart(linint).setCartAcceleration(linacc).setMode(ImpedanceControl));
+						IMotionContainer mc = actTCP.moveAsync(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setBlendingCart(linint).setCartAcceleration(linacc));
 						motionContainers.add(mc);
 						k++;
 					}
