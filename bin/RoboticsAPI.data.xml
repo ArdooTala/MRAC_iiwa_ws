@@ -109,32 +109,32 @@
             </additionalInformation>
         </frame>
         <frame id="_fb44a4ad-71b6-4cb1-bcce-20587c2fe0b1" name="Scan_Pose">
-            <transformation a="0.0" b="3.14" c="0.0" x="300.0" y="0.0" z="700.0"/>
+            <transformation a="0.0" b="3.14" c="0.0" x="0.0" y="0.0" z="0.0"/>
             <additionalInformation>
-                <info key="LastModificationTime" type="java.lang.Long" value="1559034888891"/>
+                <info key="LastModificationTime" type="java.lang.Long" value="1559234502148"/>
             </additionalInformation>
             <frame id="_4aeb310d-eef7-4a57-a8f5-e1b84f8f75db" name="P1">
-                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <transformation a="0.0" b="0.0" c="0.0" x="300.0" y="-300.0" z="600.0"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1559128858014"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1559234416439"/>
                 </additionalInformation>
             </frame>
             <frame id="_199128dc-79bd-47f7-ab95-9098e3de1b22" name="P2">
-                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <transformation a="0.0" b="0.0" c="0.0" x="300.0" y="300.0" z="600.0"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1559128896401"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1559234436929"/>
                 </additionalInformation>
             </frame>
             <frame id="_0dec304f-43b8-499a-9438-4202b6d7044c" name="P3">
-                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <transformation a="0.0" b="0.0" c="0.0" x="600.0" y="300.0" z="600.0"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1559137456236"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1559234457230"/>
                 </additionalInformation>
             </frame>
             <frame id="_a07c22a5-49f5-44fa-b28f-de62788fccbe" name="P4">
-                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <transformation a="0.0" b="0.0" c="0.0" x="600.0" y="-300.0" z="300.0"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1559137468916"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1559234473312"/>
                 </additionalInformation>
             </frame>
         </frame>
