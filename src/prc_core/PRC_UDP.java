@@ -219,20 +219,18 @@ public class PRC_UDP {
 					
 					CartesianSineImpedanceControlMode shakeSpirale;
 					shakeSpirale = CartesianSineImpedanceControlMode.createSpiralPattern(
-							CartPlane.XY, 15, 16, 1000, 180);
-					shakeSpirale.setRiseTime(0.2).setHoldTime(60).setFallTime(0.5);
+							CartPlane.XY, 15, 16, 300, 180);
+					shakeSpirale.setRiseTime(0.2).setFallTime(0.5);
 					
 					ForceCondition forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.X, 5);
 
 					
 					if (cmd.linCompMove.interpolation == "" || cmd.linCompMove.interpolation == " ")
 					{
-						actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).breakWhen(forceDetected));
-						actTCP.move(positionHold(shakeSpirale, 500, TimeUnit.MILLISECONDS));
-					}
+						actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(shakeSpirale));					}
 					else
 					{
-						IMotionContainer mc = actTCP.moveAsync(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setBlendingCart(linint).setCartAcceleration(linacc));
+						IMotionContainer mc = actTCP.moveAsync(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setBlendingCart(linint).setCartAcceleration(linacc).setMode(shakeSpirale));
 						motionContainers.add(mc);
 						k++;
 					}
