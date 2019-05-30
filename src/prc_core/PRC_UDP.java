@@ -230,7 +230,7 @@ public class PRC_UDP {
 					hard.parametrize(CartDOF.ROT).setStiffness(300);
 					hard.parametrize(CartDOF.TRANSL).setStiffness(5000);
 					
-					ForceCondition forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.X, 5);
+					ForceCondition forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.X, 7);
 
 					
 					if (cmd.linCompMove.interpolation != "C_DIS")
