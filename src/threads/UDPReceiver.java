@@ -71,7 +71,15 @@ public class UDPReceiver extends Thread {
 				linmove.frame = new Frame(Double.parseDouble(elements[1]), Double.parseDouble(elements[2]), Double.parseDouble(elements[3]), Math.toRadians(Double.parseDouble(elements[4])), Math.toRadians(Double.parseDouble(elements[5])), Math.toRadians(Double.parseDouble(elements[6])));
 				linmove.vel = Double.parseDouble(elements[7]) * 1000;
 				linmove.e1val = Math.toRadians(Double.parseDouble(elements[8]));
-				linmove.interpolation = elements[9];
+				if (elements.length > 9)
+				{
+					linmove.interpolation = elements[9];
+				}
+				else
+				{
+					linmove.interpolation = "";
+				}
+				
 				PRC_CommandData cmd = new PRC_CommandData();
 				cmd.linMove = linmove;
 				cmd.prccmdType = PRC_Enums.LIN;
