@@ -325,6 +325,7 @@ public class PRC_UDP {
 	}
 	
 	public void dispose(){
+		UDPInput.clear();
 		udprec.dispose();
 		udpsend.dispose();
 	}
