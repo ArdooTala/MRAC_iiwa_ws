@@ -219,7 +219,7 @@ public class PRC_UDP {
 					
 					CartesianSineImpedanceControlMode shakeSpirale;
 					shakeSpirale = CartesianSineImpedanceControlMode.createSpiralPattern(
-							CartPlane.XY, 15, 16, 300, 180);
+							CartPlane.XY, 15, 16, 300, 40);
 					shakeSpirale.setRiseTime(0.2).setFallTime(0.5);
 					
 					ForceCondition forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.X, 5);
