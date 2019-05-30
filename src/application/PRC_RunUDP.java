@@ -72,7 +72,7 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 		String tcpname = "TCP"; //SET TCP NAME
 		ObjectFrame baseFrame = getApplicationData().getFrame("/BASE1"); //OPTIONAL: SET BASE COORDINATE SYSTEM
 		boolean enablellogging = true; //OPTIONAL: ENABLE CONSOLE LOGGING
-		MediaFlangeIOGroup iogrp = new MediaFlangeIOGroup(kuka_Sunrise_Cabinet_1);
+		BeckhoffIOIOGroup iogrp = new BeckhoffIOIOGroup(kuka_Sunrise_Cabinet_1);
 		//AbstractIOGroup iogrp = iogrp;
 		
 		try {
