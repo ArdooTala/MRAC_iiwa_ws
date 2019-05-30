@@ -138,6 +138,17 @@
                 </additionalInformation>
             </frame>
         </frame>
+        <frame id="_7cb96688-1945-488f-af3a-1501cc119f36" name="Scan_Base">
+            <transformation a="3.1416" b="0.0" c="-3.1" x="535.0" y="140.0" z="575.0"/>
+            <additionalInformation>
+                <info key="LastModificationTime" type="java.lang.Long" value="1559231687996"/>
+            </additionalInformation>
+            <redundancyData>
+                <redundancy transformationProviderName="legacy" type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy">
+                    <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$StatusParameter" value="2" valueType="java.lang.Integer"/>
+                </redundancy>
+            </redundancyData>
+        </frame>
     </world>
     <objectTemplates>
         <toolTemplate class="" name="PolierVib">
