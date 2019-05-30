@@ -21,6 +21,7 @@ import threads.UDPReceiver;
 import threads.UDPSender;
 
 import com.kuka.common.ThreadUtil;
+import com.kuka.generated.ioAccess.MediaFlangeIOGroup;
 import com.kuka.roboticsAPI.applicationModel.IApplicationData;
 import com.kuka.roboticsAPI.conditionModel.ForceCondition;
 import com.kuka.roboticsAPI.controllerModel.Controller;
@@ -50,7 +51,7 @@ public class PRC_UDP {
 	PRC_IOGroupExtended digiogroup;
 	PRC_IOGroupExtended aniogroup;
 	
-	public void CORE_UDP(LBR robot, Controller kuka_Sunrise_Cabinet_1, SpatialObject tool, String tcpname, ObjectFrame baseFrame, boolean enablelogging, ITaskLogger logger, IApplicationData AppData, AbstractIOGroup ioGroup, String ip, int port) throws SocketException, UnknownHostException {
+	public void CORE_UDP(LBR robot, Controller kuka_Sunrise_Cabinet_1, SpatialObject tool, String tcpname, ObjectFrame baseFrame, boolean enablelogging, ITaskLogger logger, IApplicationData AppData, MediaFlangeIOGroup ioGroup, String ip, int port) throws SocketException, UnknownHostException {
 	
 		//movement parameters
 		double ptpacc = 1.0;
@@ -217,20 +218,31 @@ public class PRC_UDP {
 					
 					frm = PRC_SetRedundancy(robot, cmd);
 					
-					CartesianSineImpedanceControlMode shakeSpirale;
-					shakeSpirale = CartesianSineImpedanceControlMode.createSpiralPattern(
-							CartPlane.XY, 15, 16, 300, 40);
-					shakeSpirale.setRiseTime(0.2).setFallTime(0.5);
+					CartesianImpedanceControlMode soft = new CartesianImpedanceControlMode();
+					soft.parametrize(CartDOF.ALL).setDamping(.7);
+					soft.parametrize(CartDOF.ROT).setStiffness(300);
+					soft.parametrize(CartDOF.TRANSL).setStiffness(3000);
+					soft.parametrize(CartDOF.X).setStiffness(200);
+					
+					CartesianImpedanceControlMode hard = new CartesianImpedanceControlMode();
+					hard.parametrize(CartDOF.ALL).setDamping(.7);
+					hard.parametrize(CartDOF.ROT).setStiffness(300);
+					hard.parametrize(CartDOF.TRANSL).setStiffness(5000);
 					
 					ForceCondition forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.X, 5);
 
 					
 					if (cmd.linCompMove.interpolation == "" || cmd.linCompMove.interpolation == " ")
 					{
-						actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(shakeSpirale));					}
+						actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(soft).breakWhen(forceDetected));
+						actTCP.move(positionHold(hard, 10, TimeUnit.MILLISECONDS));
+						ioGroup.setOutput1(false);
+						actTCP.move(positionHold(hard, 500, TimeUnit.MILLISECONDS));
+						ioGroup.setOutput1(true);
+					}
 					else
 					{
-						IMotionContainer mc = actTCP.moveAsync(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setBlendingCart(linint).setCartAcceleration(linacc).setMode(shakeSpirale));
+						IMotionContainer mc = actTCP.moveAsync(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setBlendingCart(linint).setCartAcceleration(linacc).setMode(soft));
 						motionContainers.add(mc);
 						k++;
 					}

@@ -18,6 +18,7 @@ import prc_core.PRC_UDP;
 
 
 import com.kuka.generated.ioAccess.BeckhoffIOIOGroup;
+import com.kuka.generated.ioAccess.MediaFlangeIOGroup;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import com.kuka.roboticsAPI.controllerModel.Controller;
 import com.kuka.roboticsAPI.deviceModel.LBR;
@@ -71,7 +72,7 @@ public class PRC_RunUDP extends RoboticsAPIApplication {
 		String tcpname = "TCP"; //SET TCP NAME
 		ObjectFrame baseFrame = getApplicationData().getFrame("/BASE1"); //OPTIONAL: SET BASE COORDINATE SYSTEM
 		boolean enablellogging = true; //OPTIONAL: ENABLE CONSOLE LOGGING
-		BeckhoffIOIOGroup iogrp = new BeckhoffIOIOGroup(kuka_Sunrise_Cabinet_1);
+		MediaFlangeIOGroup iogrp = new MediaFlangeIOGroup(kuka_Sunrise_Cabinet_1);
 		//AbstractIOGroup iogrp = iogrp;
 		
 		try {
