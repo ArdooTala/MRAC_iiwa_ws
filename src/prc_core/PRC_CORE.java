@@ -462,7 +462,7 @@ public class PRC_CORE {
 					k++;
 				}
 
-				if (enablelogging){logger.info(cmd.linCompMove.ToString());}
+				if (enablelogging){logger.info(cmd.linMove.ToString());}
 			} else if (cmd.prccmdType.equals(PRC_Enums.PTP)){
 				if (baseFrame != null)
 				{
