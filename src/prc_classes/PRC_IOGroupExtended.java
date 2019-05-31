@@ -3,6 +3,7 @@ package prc_classes;
 import java.awt.Component;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JDialog;
@@ -19,50 +20,54 @@ public class PRC_IOGroupExtended extends AbstractIOGroup {
 		
     	super(controller, iogroup.getIOGroupName());
 
-		IOnames = new ArrayList<String>();
+    	DigIOnames = new ArrayList<String>();
+    	AnIOnames = new ArrayList<String>();
 		for (Output oput : iogroup.getOutputs()) {
 			if (oput.getDataType() == IOTypes.ANALOG & typein == PRC_Enums.ANOUT)
 			{
 				super.addAnalogOutput(oput.getIOName(), oput.getDataType(), oput.getBitSize(), 0.0, 1.0);
-				IOnames.add(oput.getIOName());
+				AnIOnames.add(oput.getIOName());
 				this.type = typein;
 			}
 			else if (oput.getDataType() == IOTypes.BOOLEAN & typein == PRC_Enums.DIGOUT)
 			{
 				super.addDigitalOutput(oput.getIOName(), oput.getDataType(), oput.getBitSize());
-				IOnames.add(oput.getIOName());
+				DigIOnames.add(oput.getIOName());
 				this.type = typein;
 			}
 		}
+		Collections.sort(DigIOnames);
+		Collections.sort(AnIOnames);
 	}
     
     private PRC_Enums type;
-    private List<String> IOnames;
+    private List<String> DigIOnames;
+    private List<String> AnIOnames;
     
 
 	public String prc_SetDigIO (int num, Boolean value)
     {
 		int ionum = num - 1;
     	if (type == PRC_Enums.DIGOUT){
-    		if (num < 0 | ionum > IOnames.size()){
+    		if (num < 0 | ionum > DigIOnames.size()){
     			return "IO number out of bounds.";
     		}
     		else
     		{
-    			super.setDigitalOutput(IOnames.get(ionum), value);
+    			super.setDigitalOutput(DigIOnames.get(ionum), value);
     			
     			int counter = 0;
     			
-    			Boolean ioval = super.getBooleanIOValue(IOnames.get(ionum), true);
+    			Boolean ioval = super.getBooleanIOValue(DigIOnames.get(ionum), true);
     			
     			while (counter < 50 & ioval != value)
     			{
     				ThreadUtil.milliSleep(3);
     				counter ++;
-    				ioval = super.getBooleanIOValue(IOnames.get(ionum), true);
+    				ioval = super.getBooleanIOValue(DigIOnames.get(ionum), true);
     			}
     			
-    			ioval = super.getBooleanIOValue(IOnames.get(ionum), true);
+    			ioval = super.getBooleanIOValue(DigIOnames.get(ionum), true);
     			//Boolean testbool = super.getBooleanIOValue(IOnames.get(ionum), true);
     			
     			if (counter >= 49)
@@ -83,16 +88,16 @@ public class PRC_IOGroupExtended extends AbstractIOGroup {
     {
 		int ionum = num - 1;
     	if (type == PRC_Enums.ANOUT){
-    		if (ionum < 0 | ionum > IOnames.size()){
+    		if (ionum < 0 | ionum > AnIOnames.size()){
     			return "IO number out of bounds.";
     		}
     		else
     		{
-    			super.setAnalogOutput(IOnames.get(ionum), value);
+    			super.setAnalogOutput(AnIOnames.get(ionum), value);
     			
     			int counter = 0;
     			
-    			while (counter < 50 & super.getAnalogIOValue(IOnames.get(ionum), true) != value)
+    			while (counter < 50 & super.getAnalogIOValue(AnIOnames.get(ionum), true) != value)
     			{
     				ThreadUtil.milliSleep(3);
     				counter ++;

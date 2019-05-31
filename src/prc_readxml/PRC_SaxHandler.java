@@ -71,6 +71,12 @@ public class PRC_SaxHandler extends DefaultHandler {
     		} else if (currCMD.prccmdType.equals(PRC_Enums.PTP)){
     			currCMD.ptpMove.frame = currFrame;
     			currCMD.ptpMove.vel = currAxisVel;
+    		} else if (currCMD.prccmdType.equals(PRC_Enums.LINCOMP)){
+    			currCMD.linCompMove.frame = currFrame;
+    			currCMD.linCompMove.vel = currCartVEL;
+    		} else if (currCMD.prccmdType.equals(PRC_Enums.PTPCOMP)){
+    			currCMD.ptpCompMove.frame = currFrame;
+    			currCMD.ptpCompMove.vel = currAxisVel;
     		} else if (currCMD.prccmdType.equals(PRC_Enums.CHANGETOOL)){
     			currCMD.changetool.toolframe = currFrame;
     		} else if (currCMD.prccmdType.equals(PRC_Enums.CIR)){
@@ -81,7 +87,6 @@ public class PRC_SaxHandler extends DefaultHandler {
     			currCMD.splPart.frame = currFrame;
     			currCMD.splPart.vel = currCartVEL;
     		} 
-    		
     		prccmds.add(currCMD);
         	currCMD = new PRC_CommandData();
         } else if("BASE".equals(qName)){

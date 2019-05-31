@@ -6,30 +6,94 @@
   </Version>
   <WarnMultipleUsageOfInputs printWarning="false" />
   <BusList>
+    <Bus BusDriverName="ECatIODriver" BusInstanceName="SYS-X48">
+      <IOList>
+        <DigitalIO Name="MediaFlange.Input1" Type="INPUT" Scope="USER_IO" StartBit="368" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="MediaFlange.Input2" Type="INPUT" Scope="USER_IO" StartBit="369" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="MediaFlange.Input3" Type="INPUT" Scope="USER_IO" StartBit="370" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="MediaFlange.Input4" Type="INPUT" Scope="USER_IO" StartBit="371" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="MediaFlange.Input5" Type="INPUT" Scope="USER_IO" StartBit="372" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="MediaFlange.Input6" Type="INPUT" Scope="USER_IO" StartBit="373" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="MediaFlange.Input7" Type="INPUT" Scope="USER_IO" StartBit="374" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="MediaFlange.Input8" Type="INPUT" Scope="USER_IO" StartBit="375" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="MediaFlange.Output1" Type="OUTPUT" Scope="USER_IO" StartBit="12728" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="MediaFlange.Output2" Type="OUTPUT" Scope="USER_IO" StartBit="12729" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="MediaFlange.Output3" Type="OUTPUT" Scope="USER_IO" StartBit="12730" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="MediaFlange.Output4" Type="OUTPUT" Scope="USER_IO" StartBit="12731" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+      </IOList>
+    </Bus>
     <Bus BusDriverName="ECatIODriver" BusInstanceName="SYS-X44">
       <IOList>
-        <DigitalIO Name="Beckhoff.In1" Type="INPUT" Scope="USER_IO" StartBit="312" BitSize="1" Signed="false">
+        <DigitalIO Name="BeckhoffIO.In1" Type="INPUT" Scope="USER_IO" StartBit="312" BitSize="1" Signed="false">
           <Description />
         </DigitalIO>
-        <DigitalIO Name="Beckhoff.In2" Type="INPUT" Scope="USER_IO" StartBit="313" BitSize="1" Signed="false">
+        <DigitalIO Name="BeckhoffIO.In2" Type="INPUT" Scope="USER_IO" StartBit="313" BitSize="1" Signed="false">
           <Description />
         </DigitalIO>
-        <DigitalIO Name="Beckhoff.In3" Type="INPUT" Scope="USER_IO" StartBit="314" BitSize="1" Signed="false">
+        <DigitalIO Name="BeckhoffIO.In3" Type="INPUT" Scope="USER_IO" StartBit="314" BitSize="1" Signed="false">
           <Description />
         </DigitalIO>
-        <DigitalIO Name="Beckhoff.In4" Type="INPUT" Scope="USER_IO" StartBit="315" BitSize="1" Signed="false">
+        <DigitalIO Name="BeckhoffIO.In4" Type="INPUT" Scope="USER_IO" StartBit="315" BitSize="1" Signed="false">
           <Description />
         </DigitalIO>
-        <DigitalIO Name="Beckhoff.Out1" Type="OUTPUT" Scope="USER_IO" StartBit="12576" BitSize="1" Signed="false">
+        <DigitalIO Name="BeckhoffIO.In5" Type="INPUT" Scope="USER_IO" StartBit="316" BitSize="1" Signed="false">
           <Description />
         </DigitalIO>
-        <DigitalIO Name="Beckhoff.Out2" Type="OUTPUT" Scope="USER_IO" StartBit="12577" BitSize="1" Signed="false">
+        <DigitalIO Name="BeckhoffIO.In6" Type="INPUT" Scope="USER_IO" StartBit="317" BitSize="1" Signed="false">
           <Description />
         </DigitalIO>
-        <DigitalIO Name="Beckhoff.Out3" Type="OUTPUT" Scope="USER_IO" StartBit="12578" BitSize="1" Signed="false">
+        <DigitalIO Name="BeckhoffIO.In7" Type="INPUT" Scope="USER_IO" StartBit="318" BitSize="1" Signed="false">
           <Description />
         </DigitalIO>
-        <DigitalIO Name="Beckhoff.Out4" Type="OUTPUT" Scope="USER_IO" StartBit="12579" BitSize="1" Signed="false">
+        <DigitalIO Name="BeckhoffIO.In8" Type="INPUT" Scope="USER_IO" StartBit="319" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="BeckhoffIO.Out1" Type="OUTPUT" Scope="USER_IO" StartBit="12576" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="BeckhoffIO.Out2" Type="OUTPUT" Scope="USER_IO" StartBit="12577" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="BeckhoffIO.Out3" Type="OUTPUT" Scope="USER_IO" StartBit="12578" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="BeckhoffIO.Out4" Type="OUTPUT" Scope="USER_IO" StartBit="12579" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="BeckhoffIO.Out5" Type="OUTPUT" Scope="USER_IO" StartBit="12580" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="BeckhoffIO.Out6" Type="OUTPUT" Scope="USER_IO" StartBit="12581" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="BeckhoffIO.Out7" Type="OUTPUT" Scope="USER_IO" StartBit="12582" BitSize="1" Signed="false">
+          <Description />
+        </DigitalIO>
+        <DigitalIO Name="BeckhoffIO.Out8" Type="OUTPUT" Scope="USER_IO" StartBit="12583" BitSize="1" Signed="false">
           <Description />
         </DigitalIO>
       </IOList>
