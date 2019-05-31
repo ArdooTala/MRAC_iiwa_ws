@@ -215,7 +215,15 @@ public class Scan_Pick extends RoboticsAPIApplication {
 //        			else if (center[0].equals("Pick")){
 //        				break;
 //        			}
-        		}	
+        			else {
+        				dX = 0;
+        				dY = 0;
+        			}
+        		}
+        		else {
+        			dX = 0;
+    				dY = 0;
+        		}
             }
             else {
             	dX = 0;
