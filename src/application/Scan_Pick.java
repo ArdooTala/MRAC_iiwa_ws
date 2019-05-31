@@ -139,7 +139,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 				locate(elements);
 			}
 			else if (elements[0].equals("Pick")){
-				pick(elements);
+				pick();
 			}
 		}
 	}
@@ -204,18 +204,10 @@ public class Scan_Pick extends RoboticsAPIApplication {
         				dX = Double.parseDouble(center[1]);
         				dY = Double.parseDouble(center[2]);
         				getLogger().info("Update Recieved.");
-//    					frm = new Frame(
-//    							Double.parseDouble(center[1]),
-//    							Double.parseDouble(center[2]),
-//    							Double.parseDouble(center[3]),
-//    							Math.toRadians(Double.parseDouble(center[4])),
-//    							Math.toRadians(Double.parseDouble(center[5])),
-//    							Math.toRadians(Double.parseDouble(center[6]))
-//    							);
     				}
-//        			else if (center[0].equals("Pick")){
-//        				break;
-//        			}
+        			else if (center[0].equals("Pick")){
+        				break;
+        			}
         			else {
         				dX = 0;
         				dY = 0;
@@ -249,25 +241,18 @@ public class Scan_Pick extends RoboticsAPIApplication {
         }
 	}
 	
-	private void pick(String[] pick_location) {
-		Frame frm = new Frame(
-				Double.parseDouble(pick_location[1]),
-				Double.parseDouble(pick_location[2]),
-				Double.parseDouble(pick_location[3]) + 200,
-				Math.toRadians(Double.parseDouble(pick_location[4])),
-				Math.toRadians(Double.parseDouble(pick_location[5])),
-				Math.toRadians(Double.parseDouble(pick_location[6]))
-				);
+	private void pick() {
+		Frame frm = iiwa_14.getCurrentCartesianPosition(actTCP);
+		frm.setZ(-300);
 		actTCP.move(lin(frm));
 		
-		frm.setZ(Double.parseDouble(pick_location[3]) - 30);
 		actTCP.move(lin(frm).breakWhen(forceDetected));
 		
 		io.setOut1(true);
 		
 		iiwa_14.move(positionHold(force , 3 , TimeUnit. SECONDS ));
 		
-		frm.setZ(Double.parseDouble(pick_location[3]) + 200);
+		frm.setZ(200);
 		actTCP.move(lin(frm));
 	}
 	
