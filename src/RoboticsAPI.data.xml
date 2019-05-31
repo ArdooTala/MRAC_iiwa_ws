@@ -142,6 +142,22 @@
                 </redundancy>
             </redundancyData>
         </frame>
+        <frame id="_82385427-d2d1-4a82-a675-e70736d8e663" name="P1">
+            <transformation a="3.1415476747768247" b="-1.4178889714250333E-5" c="3.141558560907453" x="534.9997449420603" y="140.03165715335481" z="574.9546399715363"/>
+            <additionalInformation>
+                <info key="LastModificationTime" type="java.lang.Long" value="1559314219630"/>
+                <info base="LBR_iiwa_14_R820_1" controller="KUKA_Sunrise_Cabinet_1" device="LBR_iiwa_14_R820_1" tcpName="SCGripper/TCP" tool="SCGripper" type="com.kuka.roboticsAPI.deviceModel.TeachInformation">
+                    <tcpTransformation a="0.0" b="0.0" c="0.0" x="2.505459812874111" y="1.6437055471109878" z="88.1277902934825"/>
+                </info>
+            </additionalInformation>
+            <redundancyData>
+                <redundancy transformationProviderName="KUKA_Sunrise_Cabinet_1/LBR_iiwa_14_R820_1" type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy">
+                    <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$StatusParameter" value="2" valueType="java.lang.Integer"/>
+                    <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$TurnParameter" value="12" valueType="java.lang.Integer"/>
+                    <info type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy$E1Parameter" value="-0.6476530403347981" valueType="java.lang.Double"/>
+                </redundancy>
+            </redundancyData>
+        </frame>
     </world>
     <objectTemplates>
         <toolTemplate class="" name="PolierVib">
