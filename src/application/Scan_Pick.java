@@ -147,7 +147,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	public void seek() {
 		IMotionContainer scan;
 		
-		for (int i = 1; i <= 4; i++) {
+		for (int i = 1; i <= 2; i++) {
 			ObjectFrame f = getApplicationData().getFrame("/Scan_Pose/P"+Integer.toString(i));
 			scan = actTCP.moveAsync(lin(f));
 			while (!scan.isFinished()){
@@ -160,7 +160,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	           
 				String received = new String(packet.getData(), 0, packet.getLength());
 	
-				if (received.equals("Found"))
+				if (received.equals("Locate"))
 				{
 					scan.cancel();		}
 			}
@@ -208,7 +208,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
     							Math.toRadians(Double.parseDouble(center[6]))
     							);
     				}
-        			else if (center[0].equals("located")){
+        			else if (center[0].equals("Pick")){
         				break;
         			}
         		}	
