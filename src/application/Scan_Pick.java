@@ -208,6 +208,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
         				getLogger().info("Update Recieved.");
     				}
         			else if (center[0].equals("Pick")){
+        				pick();
         				break;
         			}
         			else {
