@@ -149,7 +149,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		
 		for (int i = 1; i <= 2; i++) {
 			ObjectFrame f = getApplicationData().getFrame("/Scan_Pose/P"+Integer.toString(i));
-			scan = actTCP.moveAsync(lin(f));
+			scan = actTCP.moveAsync(lin(f).setCartVelocity(50));
 			while (!scan.isFinished()){
 				DatagramPacket packet = new DatagramPacket(buf, buf.length);
 				try {
@@ -169,15 +169,17 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	
 	private void locate(String[] loc) {	
 		Frame frm;
-		
-		frm = new Frame(
-				Double.parseDouble(loc[1]),
-				Double.parseDouble(loc[2]),
-				Double.parseDouble(loc[3]),
-				Math.toRadians(Double.parseDouble(loc[4])),
-				Math.toRadians(Double.parseDouble(loc[5])),
-				Math.toRadians(Double.parseDouble(loc[6]))
-				);
+		double dX, dY;
+		dX = Double.parseDouble(loc[1]);
+		dY = Double.parseDouble(loc[2]);
+//		frm = new Frame(
+//				Double.parseDouble(loc[1]),
+//				Double.parseDouble(loc[2]),
+//				Double.parseDouble(loc[3]),
+//				Math.toRadians(Double.parseDouble(loc[4])),
+//				Math.toRadians(Double.parseDouble(loc[5])),
+//				Math.toRadians(Double.parseDouble(loc[6]))
+//				);
 		
 		boolean initialized = false;
 		AbstractFrame initialPosition = iiwa_14.getCurrentCartesianPosition(actTCP);
@@ -199,14 +201,16 @@ public class Scan_Pick extends RoboticsAPIApplication {
         		if (center.length > 1)
         		{
         			if (center[0].equals("locate")) {
-    					frm = new Frame(
-    							Double.parseDouble(center[1]),
-    							Double.parseDouble(center[2]),
-    							Double.parseDouble(center[3]),
-    							Math.toRadians(Double.parseDouble(center[4])),
-    							Math.toRadians(Double.parseDouble(center[5])),
-    							Math.toRadians(Double.parseDouble(center[6]))
-    							);
+        				dX = Double.parseDouble(center[1]);
+        				dY = Double.parseDouble(center[2]);
+//    					frm = new Frame(
+//    							Double.parseDouble(center[1]),
+//    							Double.parseDouble(center[2]),
+//    							Double.parseDouble(center[3]),
+//    							Math.toRadians(Double.parseDouble(center[4])),
+//    							Math.toRadians(Double.parseDouble(center[5])),
+//    							Math.toRadians(Double.parseDouble(center[6]))
+//    							);
     				}
         			else if (center[0].equals("Pick")){
         				break;
@@ -222,7 +226,10 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		        initialized = true;
 			}
 	        _smartServoLINRuntime = aSmartServoLINMotion.getRuntime();
+	        frm = _smartServoLINRuntime.getCurrentCartesianPosition(actTCP);
 	        double[] vel = {10, 10, 10};
+	        frm.setX(frm.getX() + dX);
+	        frm.setY(frm.getY() + dY);
 			_smartServoLINRuntime.setMaxTranslationVelocity(vel);
 			_smartServoLINRuntime.setDestination(frm);
         }
