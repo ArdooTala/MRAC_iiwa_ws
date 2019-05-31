@@ -100,7 +100,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		force.parametrize(CartDOF.ROT).setStiffness(300);
 		
 		//break action on force
-		forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.Z, 100);
+		forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.Z, 30);
 	}
 
 	@Override
