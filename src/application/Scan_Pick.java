@@ -129,6 +129,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	}
 	
 	private void parse_command(String received) {
+		getLogger().info(received);
 		String [] elements = received.split(","); 
 		if (elements.length > 1)
 		{
@@ -142,6 +143,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 				pick();
 			}
 		}
+		buf = new byte[65508];
 	}
 	
 	public void seek() {
