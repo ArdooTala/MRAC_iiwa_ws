@@ -243,7 +243,10 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	
 	private void pick() {
 		Frame frm = iiwa_14.getCurrentCartesianPosition(actTCP);
-		frm.setZ(-300);
+		frm.setZ(0);
+		actTCP.move(lin(frm).setCartVelocity(100).breakWhen(forceDetected));
+		
+		frm.setZ(-400);
 //		actTCP.move(lin(frm).setCartVelocity(10));
 //		
 		actTCP.move(lin(frm).setCartVelocity(10).breakWhen(forceDetected));
