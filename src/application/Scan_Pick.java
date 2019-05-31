@@ -135,10 +135,10 @@ public class Scan_Pick extends RoboticsAPIApplication {
 			if (elements[0].equals("Seek")){
 				seek();
 			}
-			else if (elements[0].equals("locate")) {
+			else if (elements[0].equals("Locate")) {
 				locate(elements);
 			}
-			else if (elements[0].equals("pick")){
+			else if (elements[0].equals("Pick")){
 				pick(elements);
 			}
 		}
