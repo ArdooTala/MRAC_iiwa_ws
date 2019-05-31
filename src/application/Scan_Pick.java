@@ -217,6 +217,10 @@ public class Scan_Pick extends RoboticsAPIApplication {
         			}
         		}	
             }
+            else {
+            	dX = 0;
+				dY = 0;
+            }
         	
 	        if (!initialized){
 				//init smartservo
@@ -227,7 +231,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 			}
 	        _smartServoLINRuntime = aSmartServoLINMotion.getRuntime();
 	        frm = _smartServoLINRuntime.getCurrentCartesianPosition(actTCP);
-	        double[] vel = {10, 10, 10};
+	        double[] vel = {30, 30, 30};
 	        frm.setX(frm.getX() + dX);
 	        frm.setY(frm.getY() + dY);
 			_smartServoLINRuntime.setMaxTranslationVelocity(vel);
