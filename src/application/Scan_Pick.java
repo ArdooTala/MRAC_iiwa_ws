@@ -200,7 +200,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
             	String [] center = received.split(","); 
         		if (center.length > 1)
         		{
-        			if (center[0].equals("locate")) {
+        			if (center[0].equals("Locate")) {
         				dX = Double.parseDouble(center[1]);
         				dY = Double.parseDouble(center[2]);
 //    					frm = new Frame(
