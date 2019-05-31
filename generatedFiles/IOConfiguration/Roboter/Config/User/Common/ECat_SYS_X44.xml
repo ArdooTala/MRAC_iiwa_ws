@@ -6,7 +6,7 @@
     <Info Version="KUKA KRC4 V8.5.0" />
     <Schema Version="100" />
   </Version>
-  <ECatStackOptions BusCycleTimeMs="4" SchedTickOffset="1" RestartMode="auto" MultiFrameLossLimit="16" MultiCycCmdWkcErrLimit="3" AddSlavesToDiagMgr="false" TopologyChangeDelay="1000" DCMode="false" />
+  <ECatStackOptions BusCycleTimeMs="4" SchedTickOffset="1" RestartMode="manual" MultiFrameLossLimit="16" MultiCycCmdWkcErrLimit="3" AddSlavesToDiagMgr="false" TopologyChangeDelay="1000" DCMode="false" />
   <ECatIODriver>
     <PB_Master_Gateway ActivateADS="false" LogErrToFile="false" />
     <VARAN_Gateway MakeOwnBusInstance="false" />
