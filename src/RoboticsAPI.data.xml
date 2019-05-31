@@ -741,13 +741,14 @@
         <toolTemplate class="" name="IAACGripper">
             <frames>
                 <frame id="_cbe74af5-1e20-4699-8561-5a06667962f2" name="TCP">
-                    <transformation a="0.0" b="-1.57" c="0.0" x="0.9193964692630905" y="-5.0863993046010965" z="274.02289460899857"/>
+                    <transformation a="0.0" b="-1.57" c="0.0" x="-1.0802122203405715" y="6.050299508012278" z="279.8243787360115"/>
+                    <measurementTranslation calculationError="2.2844852962563955" method="XYZ4Point" timestamp="1559296918716"/>
                 </frame>
             </frames>
             <additionalInformation>
                 <info key="ID" type="java.lang.String" value="c368f9d7-6d90-4908-ae33-1c6a6ae989a7"/>
             </additionalInformation>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="13.14187132964236" cogY="10.29113263973612" cogZ="119.50959987326277" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.9978223659848364"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="-3.839213019155117" cogY="0.8197859378327322" cogZ="88.33990940346459" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.1385835874206958"/>
         </toolTemplate>
     </objectTemplates>
     <processDataContainer>
