@@ -212,9 +212,9 @@ public class Scan_Pick extends RoboticsAPIApplication {
 //    							Math.toRadians(Double.parseDouble(center[6]))
 //    							);
     				}
-        			else if (center[0].equals("Pick")){
-        				break;
-        			}
+//        			else if (center[0].equals("Pick")){
+//        				break;
+//        			}
         		}	
             }
             else {
