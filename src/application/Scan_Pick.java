@@ -243,6 +243,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	        double[] vel = {30, 30, 30};
 	        frm.setX(frm.getX() + dX);
 	        frm.setY(frm.getY() + dY);
+	        frm.setZ(frm.getZ() + 88);
 			_smartServoLINRuntime.setMaxTranslationVelocity(vel);
 			_smartServoLINRuntime.setDestination(frm);
         }
