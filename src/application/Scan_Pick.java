@@ -246,7 +246,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		frm.setZ(0);
 		actTCP.move(lin(frm).setCartVelocity(100).breakWhen(forceDetected));
 		
-		frm.setZ(-400);
+		frm.setZ(-300);
 //		actTCP.move(lin(frm).setCartVelocity(10));
 //		
 		actTCP.move(lin(frm).setCartVelocity(10).breakWhen(forceDetected));
