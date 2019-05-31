@@ -149,7 +149,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		
 		for (int i = 1; i <= 2; i++) {
 			ObjectFrame f = getApplicationData().getFrame("/Scan_Pose/P"+Integer.toString(i));
-			scan = actTCP.moveAsync(lin(f).setCartVelocity(50));
+			scan = actTCP.moveAsync(lin(f).setCartVelocity(100));
 			while (!scan.isFinished()){
 				DatagramPacket packet = new DatagramPacket(buf, buf.length);
 				try {
@@ -159,8 +159,8 @@ public class Scan_Pick extends RoboticsAPIApplication {
 				}
 	           
 				String received = new String(packet.getData(), 0, packet.getLength());
-	
-				if (received.equals("Locate"))
+				String [] rest = received.split(",");
+				if (rest[0].equals("Locate"))
 				{
 					scan.cancel();		}
 			}
