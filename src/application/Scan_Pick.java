@@ -107,7 +107,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	public void run() {
 		// your application execution starts here
 //		iiwa_14.move(ptpHome());
-		actTCP.moveAsync(ptp(getApplicationData().getFrame("/Scan_Base")).setJointVelocityRel(20));
+		actTCP.moveAsync(ptp(getApplicationData().getFrame("/Scan_Base")).setJointVelocityRel(.2));
 		running = true;
 		// your application execution starts here
 		while (running) {
