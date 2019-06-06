@@ -11,9 +11,9 @@
                 <redundancy transformationProviderName="legacy" type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy"/>
             </redundancyData>
             <frame id="_cf7dcafb-3100-4821-bbc3-3b3783afaab9" name="Start">
-                <transformation a="-0.0012700982039411171" b="1.5482705251104745" c="-1.5688466490558715" x="595.3298658068626" y="11.952834742602843" z="-111.2692941215092"/>
+                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="1000.0"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1469438455355"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1559821342342"/>
                     <info base="LBR_iiwa_14_R820_1" controller="KUKA_Sunrise_Cabinet_1" device="LBR_iiwa_14_R820_1" tcpName="Pin/Pin_TCP" tool="Pin" type="com.kuka.roboticsAPI.deviceModel.TeachInformation">
                         <tcpTransformation a="0.0" b="-1.5707963267948966" c="-0.0" x="0.0" y="0.0" z="135.0"/>
                     </info>
