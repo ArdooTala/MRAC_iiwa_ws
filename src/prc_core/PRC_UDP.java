@@ -166,18 +166,17 @@ public class PRC_UDP {
 					
 					frm = PRC_SetRedundancy(robot, cmd);
 
-					if (cmd.cirMove.interpolation == "C_DIS" || cmd.cirMove.interpolation == "C_VEL")
+					if (cmd.cirMove.interpolation == "" || cmd.cirMove.interpolation == " ")
+					{
+						actTCP.move(new CIRC(auxfrm, frm).setCartVelocity(cmd.cirMove.vel).setCartAcceleration(linacc));
+						
+					}
+					else
 					{
 						IMotionContainer mc = actTCP.moveAsync(new CIRC(auxfrm, frm).setCartVelocity(cmd.cirMove.vel).setCartAcceleration(linacc).setBlendingCart(linint));
 						
 						motionContainers.add(mc);
 						k++;
-					}
-					else
-					{
-
-						actTCP.move(new CIRC(auxfrm, frm).setCartVelocity(cmd.cirMove.vel).setCartAcceleration(linacc));
-
 					}
 
 					if (enablelogging){logger.info(cmd.cirMove.ToString());}
@@ -190,15 +189,15 @@ public class PRC_UDP {
 					
 					frm = PRC_SetRedundancy(robot, cmd);
 					
-					if (cmd.linMove.interpolation == "C_DIS" || cmd.linMove.interpolation == "C_VEL")
+					if (cmd.linMove.interpolation == "" || cmd.linMove.interpolation == " ")
+					{
+						actTCP.move(lin(cmd.linMove.frame).setCartVelocity(cmd.linMove.vel).setCartAcceleration(linacc));
+					}
+					else
 					{
 						IMotionContainer mc = actTCP.moveAsync(lin(cmd.linMove.frame).setCartVelocity(cmd.linMove.vel).setBlendingCart(linint).setCartAcceleration(linacc));
 						motionContainers.add(mc);
 						k++;
-					}
-					else
-					{
-						actTCP.move(lin(cmd.linMove.frame).setCartVelocity(cmd.linMove.vel).setCartAcceleration(linacc));
 					}
 
 					if (enablelogging){logger.info(cmd.linMove.ToString());}
@@ -230,15 +229,15 @@ public class PRC_UDP {
 					ImpedanceControl.parametrize(CartDOF.ROT).setStiffness(300);
 					
 					
-					if (cmd.linCompMove.interpolation == "C_DIS" || cmd.linCompMove.interpolation == "C_VEL")
+					if (cmd.linCompMove.interpolation == "" || cmd.linCompMove.interpolation == " ")
+					{
+						actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(ImpedanceControl));
+					}
+					else
 					{
 						IMotionContainer mc = actTCP.moveAsync(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setBlendingCart(linint).setCartAcceleration(linacc).setMode(ImpedanceControl));
 						motionContainers.add(mc);
 						k++;
-					}
-					else
-					{
-						actTCP.move(lin(cmd.linCompMove.frame).setCartVelocity(cmd.linCompMove.vel).setCartAcceleration(linacc).setMode(ImpedanceControl));
 					}
 
 					if (enablelogging){logger.info(cmd.linCompMove.ToString());}
@@ -251,15 +250,15 @@ public class PRC_UDP {
 					
 					frm = PRC_SetRedundancy(robot, cmd);
 
-					if (cmd.ptpMove.interpolation == "C_PTP" || cmd.ptpMove.interpolation == "C_VEL")
+					if (cmd.ptpMove.interpolation == "" || cmd.ptpMove.interpolation == " ")
+					{
+						actTCP.move(ptp(frm).setJointVelocityRel(cmd.ptpMove.vel).setJointAccelerationRel(ptpacc));
+					}
+					else
 					{
 						IMotionContainer mc = actTCP.moveAsync(ptp(frm).setJointVelocityRel(cmd.ptpMove.vel).setJointAccelerationRel(ptpacc).setBlendingCart(ptpint));
 						motionContainers.add(mc);
 						k++;
-					}
-					else
-					{
-						actTCP.move(ptp(frm).setJointVelocityRel(cmd.ptpMove.vel).setJointAccelerationRel(ptpacc));
 					}
 					
 					if (enablelogging){logger.info(cmd.ptpMove.ToString());}
@@ -279,15 +278,15 @@ public class PRC_UDP {
 					ImpedanceControl.parametrize(CartDOF.Z).setStiffness(cmd.ptpCompMove.stiffZ).setAdditionalControlForce(cmd.ptpCompMove.addFZ);
 					ImpedanceControl.parametrize(CartDOF.ROT).setStiffness(300);
 
-					if (cmd.ptpCompMove.interpolation == "C_PTP" || cmd.ptpCompMove.interpolation == "C_VEL")
+					if (cmd.ptpCompMove.interpolation == "" || cmd.ptpCompMove.interpolation == " ")
+					{
+						actTCP.move(ptp(frm).setJointVelocityRel(cmd.ptpCompMove.vel).setJointAccelerationRel(ptpacc).setMode(ImpedanceControl));
+					}
+					else
 					{
 						IMotionContainer mc = actTCP.moveAsync(ptp(frm).setJointVelocityRel(cmd.ptpCompMove.vel).setJointAccelerationRel(ptpacc).setBlendingCart(ptpint).setMode(ImpedanceControl));
 						motionContainers.add(mc);
 						k++;
-					}
-					else
-					{
-						actTCP.move(ptp(frm).setJointVelocityRel(cmd.ptpCompMove.vel).setJointAccelerationRel(ptpacc).setMode(ImpedanceControl));
 					}
 					
 					if (enablelogging){logger.info(cmd.ptpCompMove.ToString());}

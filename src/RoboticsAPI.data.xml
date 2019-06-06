@@ -11,9 +11,9 @@
                 <redundancy transformationProviderName="legacy" type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy"/>
             </redundancyData>
             <frame id="_cf7dcafb-3100-4821-bbc3-3b3783afaab9" name="Start">
-                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="1000.0"/>
+                <transformation a="-0.0012700982039411171" b="1.5482705251104745" c="-1.5688466490558715" x="595.3298658068626" y="11.952834742602843" z="-111.2692941215092"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1559821342342"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1469438455355"/>
                     <info base="LBR_iiwa_14_R820_1" controller="KUKA_Sunrise_Cabinet_1" device="LBR_iiwa_14_R820_1" tcpName="Pin/Pin_TCP" tool="Pin" type="com.kuka.roboticsAPI.deviceModel.TeachInformation">
                         <tcpTransformation a="0.0" b="-1.5707963267948966" c="-0.0" x="0.0" y="0.0" z="135.0"/>
                     </info>
@@ -741,13 +741,13 @@
         <toolTemplate class="" name="IAACGripper">
             <frames>
                 <frame id="_cbe74af5-1e20-4699-8561-5a06667962f2" name="TCP">
-                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                    <transformation a="0.0" b="-1.57" c="0.0" x="0.9193964692630905" y="-5.0863993046010965" z="274.02289460899857"/>
                 </frame>
             </frames>
             <additionalInformation>
                 <info key="ID" type="java.lang.String" value="c368f9d7-6d90-4908-ae33-1c6a6ae989a7"/>
             </additionalInformation>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="-3.8" cogY="0.8197859378327322" cogZ="88.33990940346459" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.0"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="13.14187132964236" cogY="10.29113263973612" cogZ="119.50959987326277" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.9978223659848364"/>
         </toolTemplate>
     </objectTemplates>
     <processDataContainer>
