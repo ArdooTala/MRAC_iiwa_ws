@@ -741,8 +741,7 @@
         <toolTemplate class="" name="IAACGripper">
             <frames>
                 <frame id="_cbe74af5-1e20-4699-8561-5a06667962f2" name="TCP">
-                    <transformation a="0.0" b="-1.57" c="0.0" x="-1.0802122203405715" y="6.050299508012278" z="279.8243787360115"/>
-                    <measurementTranslation calculationError="2.2844852962563955" method="XYZ4Point" timestamp="1559296918716"/>
+                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
                 </frame>
             </frames>
             <additionalInformation>
