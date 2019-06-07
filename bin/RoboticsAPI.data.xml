@@ -748,7 +748,7 @@
             <additionalInformation>
                 <info key="ID" type="java.lang.String" value="c368f9d7-6d90-4908-ae33-1c6a6ae989a7"/>
             </additionalInformation>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="13.14187132964236" cogY="10.29113263973612" cogZ="119.50959987326277" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.0"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="346.97394852291995" cogY="323.08663350024887" cogZ="297.27226606242954" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.059005382537583626"/>
         </toolTemplate>
     </objectTemplates>
     <processDataContainer>
