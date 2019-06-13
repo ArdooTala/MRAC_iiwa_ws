@@ -717,7 +717,7 @@
                 <info key="ID" type="java.lang.String" value="7c7cd4e9-4c21-4ab0-ab19-2ec03621c4b7"/>
                 <info key="SafetyID" type="java.lang.Integer" value="1"/>
             </additionalInformation>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="11.716488023223059" cogY="25.48701946129475" cogZ="26.8305864113358" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.5592213375819028"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.21536396850589098" cogY="3.135785742746942" cogZ="41.28292564511548" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.4205886204507339"/>
         </toolTemplate>
         <toolTemplate class="" name="Tool">
             <frames>
@@ -769,7 +769,7 @@
         <processData dataType="java.lang.Double" defaultValue="0.5" id="acce" value="0.05"/>
         <processData dataType="java.lang.Double" defaultValue="0.5" id="jerk" value="0.01"/>
         <processData dataType="java.lang.Boolean" defaultValue="false" displayName="SpaceSignal" editableOnHmi="false" id="spaceSignal" value="true"/>
-        <processData dataType="java.lang.Boolean" defaultValue="false" displayName="record Track" editableOnHmi="false" id="trackPath" value="false"/>
+        <processData dataType="java.lang.Boolean" defaultValue="false" displayName="record Track" editableOnHmi="false" id="trackPath" value="true"/>
         <processData dataType="java.lang.Boolean" defaultValue="false" displayName="State Flashing LED" editableOnHmi="true" id="flashingLED" value="false"/>
         <processData dataType="java.lang.Double" defaultValue="0.5" displayName="Velocity_PTP" id="pd_ptpVelocity" max="0.9" min="0.01" unit="%" value="0.15"/>
         <processData dataType="java.lang.Double" defaultValue="100" displayName="Velocity_LIN" id="pd_linVelocity" max="2000.0" min="10.0" unit="mm/s" value="25"/>
