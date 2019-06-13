@@ -19,9 +19,9 @@ public class Impedance extends RoboticsAPIApplication {
 
 	final static double offsetAxis2And4=Math.toRadians(10);
 
-	private static final int stiffnessZ = 500;
-	private static final int stiffnessY = 500;
-	private static final int stiffnessX = 500;
+	private static final int stiffnessZ = 300;
+	private static final int stiffnessY = 300;
+	private static final int stiffnessX = 300;
 	
 	@Inject
 	private LBR lbr;
