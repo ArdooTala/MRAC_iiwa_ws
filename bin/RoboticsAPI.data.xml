@@ -377,8 +377,7 @@
                     <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
                 </frame>
                 <frame id="_745481a7-7fae-4d23-8260-aa0be17f321e" name="Pin">
-                    <transformation a="0.0" b="0.0" c="0.0" x="-21.640737214542455" y="-127.65020978690309" z="5.002872238087434"/>
-                    <measurementTranslation calculationError="0.2750560473546051" method="XYZ4Point" timestamp="1560524061097"/>
+                    <transformation a="1.5708" b="1.5708" c="0.0" x="-21.640737214542455" y="-127.65020978690309" z="5.002872238087434"/>
                 </frame>
             </frames>
             <additionalInformation>
