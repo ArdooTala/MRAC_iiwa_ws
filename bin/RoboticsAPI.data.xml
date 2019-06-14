@@ -371,8 +371,7 @@
         <toolTemplate class="" name="SCGripper">
             <frames>
                 <frame id="_9d28347f-5a67-4388-bb46-7eec275b0afc" name="TCP">
-                    <transformation a="0.0" b="0.0" c="0.0" x="2.186529976768929" y="0.4779581273452961" z="89.79698771455692"/>
-                    <measurementTranslation calculationError="0.8819764490671036" method="XYZ4Point" timestamp="1560523133424"/>
+                    <transformation a="3.1416" b="0.0" c="0.0" x="2.186529976768929" y="0.4779581273452961" z="89.79698771455692"/>
                 </frame>
                 <frame id="_b4e08c49-0d90-4591-8acf-117337fd4a44" name="RealSense">
                     <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
