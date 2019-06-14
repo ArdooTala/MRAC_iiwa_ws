@@ -3,11 +3,10 @@
     <world>
         <gravitation x="0.0" y="0.0" z="9.81"/>
         <frame id="_f13bb652-bf00-4cb2-8ea9-055e52466f94" name="BASE1">
-            <transformation a="-1.5727436047208174" b="-0.009549555928928179" c="0.006918550659981877" x="607.3678158946122" y="-38.75981601489778" z="170.11600161041804"/>
+            <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
             <additionalInformation>
-                <info key="LastModificationTime" type="java.lang.Long" value="1539159685500"/>
+                <info key="LastModificationTime" type="java.lang.Long" value="1560522705799"/>
                 <info key="UseAsBaseForJogging" type="java.lang.Boolean" value="true"/>
-                <info measurementMethod="Base3Point" timestamp="1539159685500" type="com.kuka.roboticsAPI.deviceModel.MeasurementInformation"/>
             </additionalInformation>
         </frame>
         <frame id="_a4176be6-6aec-4fc3-8ca9-7fc026279c37" name="StartPos">
