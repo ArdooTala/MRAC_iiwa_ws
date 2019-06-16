@@ -62,7 +62,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 	public void run() {
 		
 		//lBR_iiwa_14_R820_1.setESMState("1");
-		lBR_iiwa_14_R820_1.move(ptp(0,0,0,0,0,0,0));
+		lBR_iiwa_14_R820_1.move(ptp(0,0,0,0,0,0,0).setJointVelocityRel(.3));
 		
 		tool = createFromTemplate("SCGripper");
 		tool.attachTo(lBR_iiwa_14_R820_1.getFlange());
