@@ -165,7 +165,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 						scan.cancel();
 					}
 				} catch (IOException e1) {
-					e1.printStackTrace();
+					// e1.printStackTrace();
 				}
 			}
 		}
