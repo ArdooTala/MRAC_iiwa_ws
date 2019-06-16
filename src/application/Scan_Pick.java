@@ -191,7 +191,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 //				);
 		
 		boolean initialized = false;
-		AbstractFrame initialPosition = iiwa_14.getCurrentCartesianPosition(actTCP);
+		AbstractFrame initialPosition = iiwa_14.getCurrentCartesianPosition(camTCP);
 		SmartServoLIN aSmartServoLINMotion = new SmartServoLIN(initialPosition);
         aSmartServoLINMotion.setMinimumTrajectoryExecutionTime(20e-3);
         
@@ -241,7 +241,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		        initialized = true;
 			}
 	        _smartServoLINRuntime = aSmartServoLINMotion.getRuntime();
-	        frm = _smartServoLINRuntime.getCurrentCartesianPosition(actTCP);
+	        frm = _smartServoLINRuntime.getCurrentCartesianPosition(camTCP);
 	        double[] vel = {30, 30, 30};
 	        frm.setX(frm.getX() + dX);
 	        frm.setY(frm.getY() + dY);
