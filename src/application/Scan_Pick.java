@@ -116,22 +116,22 @@ public class Scan_Pick extends RoboticsAPIApplication {
             try {
     			socket.setSoTimeout(5000);
 				socket.receive(packet);
-			} catch (IOException e1) {
+				
+				String received = new String(packet.getData(), 0, packet.getLength());
+	             
+	            if (received.length() > 3)
+	            {
+	            	parse_command(received);
+	            }
+            } catch (IOException e1) {
 				//e1.printStackTrace();
 			}
-             
-            String received = new String(packet.getData(), 0, packet.getLength());
-             
-            if (received.length() > 3)
-            {
-            	parse_command(received);
-            }
         }
         socket.close();
 	}
 	
 	private void parse_command(String received) {
-		// getLogger().info(received);
+		getLogger().info(received);
 		String [] elements = received.split(","); 
 		if (elements.length > 1)
 		{
@@ -233,7 +233,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	            }
 				
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				// e1.printStackTrace();
 				dX = 0;
 				dY = 0;
 			}
