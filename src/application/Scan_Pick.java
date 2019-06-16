@@ -60,7 +60,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	
 	//create tool and TCP
 	private Tool tool;
-	private ObjectFrame actTCP, rlsTCP;
+	private ObjectFrame actTCP, camTCP;
 	
     private DatagramSocket socket;
     public boolean running;
@@ -89,7 +89,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		tool = createFromTemplate("SCGripper");
 		tool.attachTo(iiwa_14.getFlange());
 		actTCP = tool.getFrame("/TCP");
-		rlsTCP = tool.getFrame("/RealSense");
+		camTCP = tool.getFrame("/Camera");
 		
 		//add extra force
 		force = new CartesianImpedanceControlMode();
@@ -151,7 +151,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		
 		for (int i = 1; i <= 2; i++) {
 			ObjectFrame f = getApplicationData().getFrame("/Scan_Pose/P"+Integer.toString(i));
-			scan = actTCP.moveAsync(lin(f).setCartVelocity(100));
+			scan = camTCP.moveAsync(lin(f).setCartVelocity(100));
 			while (!scan.isFinished()){
 				DatagramPacket packet = new DatagramPacket(buf, buf.length);
 				try {
@@ -228,7 +228,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
         	
 	        if (!initialized){
 				//init smartservo
-		        rlsTCP.moveAsync(aSmartServoLINMotion);
+		        camTCP.moveAsync(aSmartServoLINMotion);
 	
 		        _smartServoLINRuntime = aSmartServoLINMotion.getRuntime();
 		        initialized = true;
