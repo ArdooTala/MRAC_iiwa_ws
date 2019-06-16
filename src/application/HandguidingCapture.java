@@ -93,7 +93,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 		//IMotionContainer handle = lBR_iiwa_14_R820_1.move(handGuiding());
 		
 		JointImpedanceControlMode impMode = new JointImpedanceControlMode(1.0,
-				7.0, 7.0, 7.0, 5.0, 3.0, 1.0);
+				5.0, 5.0, 3.0, 3.0, 3.0, 1.0);
 		IMotionContainer handle;
 		handle = lBR_iiwa_14_R820_1.moveAsync(positionHold(impMode, -1,
 				TimeUnit.SECONDS));
