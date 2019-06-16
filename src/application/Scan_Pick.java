@@ -153,6 +153,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		boolean found = false;
 		while (!found) {
 			for (int i = 1; i <= 2; i++) {
+				if (found) break;
 				ObjectFrame f = getApplicationData().getFrame("/Scan_Pose/P"+Integer.toString(i));
 				scan = camTCP.moveAsync(lin(f).setCartVelocity(100));
 				while (!scan.isFinished()){
@@ -160,7 +161,6 @@ public class Scan_Pick extends RoboticsAPIApplication {
 					try {
 						socket.setSoTimeout(3000);
 						socket.receive(packet);
-						
 					} catch (IOException e1) {
 						// e1.printStackTrace();
 					}
