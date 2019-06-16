@@ -126,18 +126,18 @@
             </frame>
         </frame>
         <frame id="_7cb96688-1945-488f-af3a-1501cc119f36" name="Scan_Base">
-            <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="700.0"/>
+            <transformation a="2.445281138979436" b="0.8711443663563087" c="-0.815947919135333" x="-97.86679932213008" y="506.7677122369382" z="1056.0336844317753"/>
             <additionalInformation>
-                <info key="LastModificationTime" type="java.lang.Long" value="1560705609371"/>
-                <info base="LBR_iiwa_14_R820_1" controller="KUKA_Sunrise_Cabinet_1" device="LBR_iiwa_14_R820_1" tcpName="Flange" tool="Flange" type="com.kuka.roboticsAPI.deviceModel.TeachInformation">
-                    <tcpTransformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <info key="LastModificationTime" type="java.lang.Long" value="1560709012351"/>
+                <info base="LBR_iiwa_14_R820_1" controller="KUKA_Sunrise_Cabinet_1" device="LBR_iiwa_14_R820_1" tcpName="SCGripper/Camera" tool="SCGripper" type="com.kuka.roboticsAPI.deviceModel.TeachInformation">
+                    <tcpTransformation a="0.5427974000000001" b="0.010821000000000002" c="-1.579523" x="9.12" y="112.27" z="54.52"/>
                 </info>
             </additionalInformation>
             <redundancyData>
                 <redundancy transformationProviderName="KUKA_Sunrise_Cabinet_1/LBR_iiwa_14_R820_1" type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy">
                     <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$StatusParameter" value="2" valueType="java.lang.Integer"/>
-                    <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$TurnParameter" value="12" valueType="java.lang.Integer"/>
-                    <info type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy$E1Parameter" value="-0.6475864080272803" valueType="java.lang.Double"/>
+                    <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$TurnParameter" value="94" valueType="java.lang.Integer"/>
+                    <info type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy$E1Parameter" value="-0.01434014371533941" valueType="java.lang.Double"/>
                 </redundancy>
             </redundancyData>
         </frame>
