@@ -179,8 +179,10 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	private void locate(String[] loc) {	
 		Frame frm;
 		double dX, dY;
-		dX = Double.parseDouble(loc[1]);
-		dY = Double.parseDouble(loc[2]);
+//		dX = Double.parseDouble(loc[1]);
+//		dY = Double.parseDouble(loc[2]);
+		dX = 0;
+		dY = 0;
 //		frm = new Frame(
 //				Double.parseDouble(loc[1]),
 //				Double.parseDouble(loc[2]),
@@ -198,6 +200,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
         while (true) {
         	DatagramPacket packet = new DatagramPacket(buf, buf.length);
             try {
+				socket.setSoTimeout(500);
 				socket.receive(packet);
 				String received = new String(packet.getData(), 0, packet.getLength());
 	            if (received.length() > 3)
@@ -230,7 +233,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	            }
 				
 			} catch (IOException e1) {
-				//e1.printStackTrace();
+				e1.printStackTrace();
 				dX = 0;
 				dY = 0;
 			}
