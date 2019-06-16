@@ -75,7 +75,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		// initialize your application here
 		try {
 			socket = new DatagramSocket(30000);
-			socket.setSoTimeout(100);
+			socket.setSoTimeout(1000);
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
@@ -114,6 +114,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		while (running) {
             DatagramPacket packet = new DatagramPacket(buf, buf.length);
             try {
+    			socket.setSoTimeout(100);
 				socket.receive(packet);
 			} catch (IOException e1) {
 				e1.printStackTrace();
@@ -157,15 +158,15 @@ public class Scan_Pick extends RoboticsAPIApplication {
 				DatagramPacket packet = new DatagramPacket(buf, buf.length);
 				try {
 					socket.receive(packet);
+					String received = new String(packet.getData(), 0, packet.getLength());
+					String [] rest = received.split(",");
+					if (rest[0].equals("Locate"))
+					{
+						scan.cancel();
+					}
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-	           
-				String received = new String(packet.getData(), 0, packet.getLength());
-				String [] rest = received.split(",");
-				if (rest[0].equals("Locate"))
-				{
-					scan.cancel();		}
 			}
 		}
 	}
