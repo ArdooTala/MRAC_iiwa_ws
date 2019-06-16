@@ -122,7 +122,7 @@ public class HandguidingCapture extends RoboticsAPIApplication {
 		}
 		//lBR_iiwa_14_R820_1.setESMState("1");
 		// your application execution starts here
-		lBR_iiwa_14_R820_1.move(ptp(0,0,0,0,0,0,0));
+		//lBR_iiwa_14_R820_1.move(ptp(0,0,0,0,0,0,0));
 	}
 	
 	@Override
