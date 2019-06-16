@@ -199,39 +199,39 @@ public class Scan_Pick extends RoboticsAPIApplication {
         	DatagramPacket packet = new DatagramPacket(buf, buf.length);
             try {
 				socket.receive(packet);
+				String received = new String(packet.getData(), 0, packet.getLength());
+	            if (received.length() > 3)
+	            {	
+	            	String [] center = received.split(","); 
+	        		if (center.length > 1)
+	        		{
+	        			if (center[0].equals("Locate")) {
+	        				dX = Double.parseDouble(center[1]);
+	        				dY = Double.parseDouble(center[2]);
+	        				getLogger().info("Update Recieved.");
+	    				}
+	        			else if (center[0].equals("Pick")){
+	        				pick();
+	        				break;
+	        			}
+	        			else {
+	        				dX = 0;
+	        				dY = 0;
+	        			}
+	        		}
+	        		else {
+	        			dX = 0;
+	    				dY = 0;
+	        		}
+	            }
+	            else {
+	            	dX = 0;
+					dY = 0;
+	            }
+				
 			} catch (IOException e1) {
 				//e1.printStackTrace();
 			}
-             
-            String received = new String(packet.getData(), 0, packet.getLength());
-            if (received.length() > 3)
-            {	
-            	String [] center = received.split(","); 
-        		if (center.length > 1)
-        		{
-        			if (center[0].equals("Locate")) {
-        				dX = Double.parseDouble(center[1]);
-        				dY = Double.parseDouble(center[2]);
-        				getLogger().info("Update Recieved.");
-    				}
-        			else if (center[0].equals("Pick")){
-        				pick();
-        				break;
-        			}
-        			else {
-        				dX = 0;
-        				dY = 0;
-        			}
-        		}
-        		else {
-        			dX = 0;
-    				dY = 0;
-        		}
-            }
-            else {
-            	dX = 0;
-				dY = 0;
-            }
         	
 	        if (!initialized){
 				//init smartservo
