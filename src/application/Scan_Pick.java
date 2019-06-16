@@ -200,7 +200,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
             try {
 				socket.receive(packet);
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				//e1.printStackTrace();
 			}
              
             String received = new String(packet.getData(), 0, packet.getLength());
