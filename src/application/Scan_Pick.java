@@ -75,6 +75,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		// initialize your application here
 		try {
 			socket = new DatagramSocket(30000);
+			socket.setSoTimeout(100);
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
