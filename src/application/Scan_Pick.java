@@ -150,23 +150,27 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	
 	public void seek() {
 		IMotionContainer scan;
-		
-		for (int i = 1; i <= 2; i++) {
-			ObjectFrame f = getApplicationData().getFrame("/Scan_Pose/P"+Integer.toString(i));
-			scan = camTCP.moveAsync(lin(f).setCartVelocity(100));
-			while (!scan.isFinished()){
-				DatagramPacket packet = new DatagramPacket(buf, buf.length);
-				try {
-					socket.setSoTimeout(3000);
-					socket.receive(packet);
+		boolean found = false;
+		while (!found) {
+			for (int i = 1; i <= 2; i++) {
+				ObjectFrame f = getApplicationData().getFrame("/Scan_Pose/P"+Integer.toString(i));
+				scan = camTCP.moveAsync(lin(f).setCartVelocity(100));
+				while (!scan.isFinished()){
+					DatagramPacket packet = new DatagramPacket(buf, buf.length);
+					try {
+						socket.setSoTimeout(3000);
+						socket.receive(packet);
+						
+					} catch (IOException e1) {
+						// e1.printStackTrace();
+					}
 					String received = new String(packet.getData(), 0, packet.getLength());
 					String [] rest = received.split(",");
 					if (rest[0].equals("Locate"))
 					{
+						found = true;
 						scan.cancel();
 					}
-				} catch (IOException e1) {
-					// e1.printStackTrace();
 				}
 			}
 		}
