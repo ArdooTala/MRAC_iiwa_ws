@@ -114,10 +114,10 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		while (running) {
             DatagramPacket packet = new DatagramPacket(buf, buf.length);
             try {
-    			socket.setSoTimeout(100);
+    			socket.setSoTimeout(5000);
 				socket.receive(packet);
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				//e1.printStackTrace();
 			}
              
             String received = new String(packet.getData(), 0, packet.getLength());
@@ -131,7 +131,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	}
 	
 	private void parse_command(String received) {
-		getLogger().info(received);
+		// getLogger().info(received);
 		String [] elements = received.split(","); 
 		if (elements.length > 1)
 		{
