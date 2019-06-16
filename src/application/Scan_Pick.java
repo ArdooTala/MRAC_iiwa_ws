@@ -242,10 +242,9 @@ public class Scan_Pick extends RoboticsAPIApplication {
 			}
 	        _smartServoLINRuntime = aSmartServoLINMotion.getRuntime();
 	        frm = _smartServoLINRuntime.getCurrentCartesianPosition(camTCP);
-	        double[] vel = {30, 30, 30};
+	        double[] vel = {5, 5, 5};
 	        frm.setX(frm.getX() + dX);
 	        frm.setY(frm.getY() + dY);
-	        frm.setZ(frm.getZ() + 88);
 			_smartServoLINRuntime.setMaxTranslationVelocity(vel);
 			_smartServoLINRuntime.setDestination(frm);
         }
