@@ -232,27 +232,29 @@ public class Scan_Pick extends RoboticsAPIApplication {
 					dY = 0;
 	            }
 				
+	            if (!initialized){
+					//init smartservo
+			        camTCP.moveAsync(aSmartServoLINMotion);
+		
+			        _smartServoLINRuntime = aSmartServoLINMotion.getRuntime();
+			        initialized = true;
+				}
+		        _smartServoLINRuntime = aSmartServoLINMotion.getRuntime();
+		        frm = _smartServoLINRuntime.getCurrentCartesianPosition(camTCP);
+		        double[] vel = {20, 20, 20};
+		        getLogger().info(Double.toString(dX) + ", " + Double.toString(dY));
+		        frm.setX(frm.getX() + dX);
+		        frm.setY(frm.getY() + dY);
+				_smartServoLINRuntime.setMaxTranslationVelocity(vel);
+				_smartServoLINRuntime.setDestination(frm);
+	            
 			} catch (IOException e1) {
 				// e1.printStackTrace();
 				dX = 0;
 				dY = 0;
 			}
         	
-	        if (!initialized){
-				//init smartservo
-		        camTCP.moveAsync(aSmartServoLINMotion);
-	
-		        _smartServoLINRuntime = aSmartServoLINMotion.getRuntime();
-		        initialized = true;
-			}
-	        _smartServoLINRuntime = aSmartServoLINMotion.getRuntime();
-	        frm = _smartServoLINRuntime.getCurrentCartesianPosition(camTCP);
-	        double[] vel = {20, 20, 20};
-	        getLogger().info(Double.toString(dX) + ", " + Double.toString(dY));
-	        frm.setX(frm.getX() + dX);
-	        frm.setY(frm.getY() + dY);
-			_smartServoLINRuntime.setMaxTranslationVelocity(vel);
-			_smartServoLINRuntime.setDestination(frm);
+	        
         }
 	}
 	
