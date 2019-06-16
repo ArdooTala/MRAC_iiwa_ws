@@ -179,6 +179,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	private void locate(String[] loc) {	
 		Frame frm;
 		double dX, dY;
+		double[] vel = {20, 20, 20};
 //		dX = Double.parseDouble(loc[1]);
 //		dY = Double.parseDouble(loc[2]);
 		dX = 0;
@@ -241,7 +242,6 @@ public class Scan_Pick extends RoboticsAPIApplication {
 				}
 		        _smartServoLINRuntime = aSmartServoLINMotion.getRuntime();
 		        frm = _smartServoLINRuntime.getCurrentCartesianPosition(camTCP);
-		        double[] vel = {20, 20, 20};
 		        getLogger().info(Double.toString(dX) + ", " + Double.toString(dY));
 		        frm.setX(frm.getX() + dX);
 		        frm.setY(frm.getY() + dY);
@@ -254,8 +254,6 @@ public class Scan_Pick extends RoboticsAPIApplication {
 				dX = 0;
 				dY = 0;
 			}
-        	
-	        
         }
 	}
 	
