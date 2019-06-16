@@ -113,15 +113,15 @@
                 <info key="LastModificationTime" type="java.lang.Long" value="1559311057834"/>
             </additionalInformation>
             <frame id="_4aeb310d-eef7-4a57-a8f5-e1b84f8f75db" name="P1">
-                <transformation a="1.5707" b="0.0" c="-3.1416" x="400.0" y="600.0" z="500.0"/>
+                <transformation a="0.0" b="0.0" c="-1.5707" x="400.0" y="600.0" z="500.0"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1560704538761"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1560705073703"/>
                 </additionalInformation>
             </frame>
             <frame id="_199128dc-79bd-47f7-ab95-9098e3de1b22" name="P2">
-                <transformation a="1.5707" b="0.0" c="-3.1416" x="-400.0" y="600.0" z="500.0"/>
+                <transformation a="0.0" b="0.0" c="-1.5707" x="-400.0" y="600.0" z="500.0"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1560704529656"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1560705094742"/>
                 </additionalInformation>
             </frame>
         </frame>
