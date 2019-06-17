@@ -179,7 +179,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	private void locate(String[] loc) {	
 		Frame frm;
 		double dX, dY;
-		double[] vel = {20, 20, 20};
+		double[] vel = {30, 30, 30};
 //		dX = Double.parseDouble(loc[1]);
 //		dY = Double.parseDouble(loc[2]);
 		dX = 0;
