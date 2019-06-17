@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import com.kuka.common.ThreadUtil;
 import com.kuka.connectivity.motionModel.smartServoLIN.ISmartServoLINRuntime;
 import com.kuka.connectivity.motionModel.smartServoLIN.SmartServoLIN;
 import com.kuka.generated.ioAccess.BeckhoffIOGroup;
@@ -17,6 +18,7 @@ import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 
 import com.kuka.roboticsAPI.conditionModel.ForceCondition;
 import com.kuka.roboticsAPI.controllerModel.Controller;
+import com.kuka.roboticsAPI.deviceModel.JointPosition;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.AbstractFrame;
 import com.kuka.roboticsAPI.geometricModel.CartDOF;
@@ -26,6 +28,7 @@ import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.geometricModel.math.CoordinateAxis;
 import com.kuka.roboticsAPI.motionModel.IMotionContainer;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
+import com.kuka.roboticsAPI.motionModel.controlModeModel.PositionControlMode;
 
 /**
  * Implementation of a robot application.
@@ -54,6 +57,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	
 	//add extra force
 	private CartesianImpedanceControlMode force;
+	private PositionControlMode rigid;
 	
 	//break action on force
 	ForceCondition forceDetected;
@@ -99,6 +103,8 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		force.parametrize(CartDOF.Y).setStiffness(3000);
 		force.parametrize(CartDOF.Z).setStiffness(3000);
 		force.parametrize(CartDOF.ROT).setStiffness(300);
+		
+		rigid = new PositionControlMode();
 		
 		//break action on force
 		forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.Z, 20);
@@ -277,21 +283,25 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		frm.setBetaRad(-1.5707);
 		frm.setGammaRad(1.5707 + dG);
 		
-		actTCP.move(ptp(frm).setJointVelocityRel(.3));
+		actTCP.move(ptp(frm).setJointVelocityRel(.5));
 		
-		actTCP.move(lin(frm).setCartVelocity(100).breakWhen(forceDetected));
+		// actTCP.move(lin(frm).setCartVelocity(200).breakWhen(forceDetected));
 		
 		frm.setZ(65);
 //		actTCP.move(lin(frm).setCartVelocity(10));
 //		
-		actTCP.move(lin(frm).setCartVelocity(10).breakWhen(forceDetected));
+		actTCP.move(lin(frm).setCartVelocity(100).breakWhen(forceDetected));
 		
 		io.setOut1(true);
 		
-		iiwa_14.move(positionHold(force , 3 , TimeUnit. SECONDS ));
+		ThreadUtil.milliSleep(3000);
+		iiwa_14.move(positionHold(force , 3 , TimeUnit. SECONDS));
 		
-		frm.setZ(200);
-		actTCP.move(lin(frm).setCartVelocity(10));
+		frm.setZ(400);
+		actTCP.move(lin(frm).setCartVelocity(500));
+		JointPosition jointPosition = new JointPosition(0,0,0,0,0,Math.PI,0);
+
+		actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
 	}
 	
     public void dispose(){
