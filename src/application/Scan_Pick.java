@@ -107,7 +107,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		rigid = new PositionControlMode();
 		
 		//break action on force
-		forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.Z, 20);
+		forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.Z, 15);
 	}
 
 	@Override
