@@ -212,7 +212,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	        			if (center[0].equals("Locate")) {
 	        				dX = Double.parseDouble(center[1]);
 	        				dY = Double.parseDouble(center[2]);
-	        				getLogger().info("Update Recieved.");
+	        				//getLogger().info("Update Recieved.");
 	    				}
 	        			else if (center[0].equals("Pick")){
 	        				break;
