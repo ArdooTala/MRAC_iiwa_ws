@@ -142,7 +142,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 				locate(elements);
 			}
 			else if (elements[0].equals("Pick")){
-				pick();
+				pick(elements);
 			}
 		}
 		buf = new byte[65508];
@@ -215,7 +215,6 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	        				getLogger().info("Update Recieved.");
 	    				}
 	        			else if (center[0].equals("Pick")){
-	        				pick();
 	        				break;
 	        			}
 	        			else {
@@ -260,13 +259,21 @@ public class Scan_Pick extends RoboticsAPIApplication {
         }
 	}
 	
-	private void pick() {
+	private void pick(String[] loc) {
+		double dX, dY, dG;
+		dX = Double.parseDouble(loc[1]);
+		dY = Double.parseDouble(loc[2]);
+		dG = Double.parseDouble(loc[3]);
+		
 		Frame frm = iiwa_14.getCurrentCartesianPosition(camTCP);
+		
+		frm.setX(frm.getX() + dX);
+		frm.setY(frm.getY() + dY);
 		frm.setZ(400);
 		
 		frm.setAlphaRad(-1.5707);
 		frm.setBetaRad(-1.5707);
-		frm.setGammaRad(1.5707);
+		frm.setGammaRad(1.5707 + dG);
 		
 		actTCP.move(ptp(frm).setJointVelocityRel(.1));
 		
