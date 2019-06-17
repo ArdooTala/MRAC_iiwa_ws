@@ -290,7 +290,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		frm.setZ(65);
 //		actTCP.move(lin(frm).setCartVelocity(10));
 //		
-		actTCP.move(lin(frm).setCartVelocity(100).breakWhen(forceDetected));
+		actTCP.move(lin(frm).setCartVelocity(30).breakWhen(forceDetected));
 		
 		io.setOut1(true);
 		
@@ -299,7 +299,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		
 		frm.setZ(400);
 		actTCP.move(lin(frm).setCartVelocity(500));
-		JointPosition jointPosition = new JointPosition(0,0,0,0,0,Math.PI,0);
+		JointPosition jointPosition = new JointPosition(0,0,0,0,0,Math.PI/2,0);
 
 		actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
 	}
