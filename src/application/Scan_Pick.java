@@ -179,7 +179,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	private void locate(String[] loc) {	
 		Frame frm;
 		double dX, dY;
-		double[] vel = {35, 35, 35};
+		double[] vel = {50, 50, 50};
 //		dX = Double.parseDouble(loc[1]);
 //		dY = Double.parseDouble(loc[2]);
 		dX = 0;
@@ -264,7 +264,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		Frame frm = iiwa_14.getCurrentCartesianPosition(camTCP);
 		frm.setZ(400);
 		
-		frm.setBetaRad(frm.getBetaRad() - 1.5707);
+		frm.setBetaRad(frm.getBetaRad() + 1.5707);
 		//frm.setGammaRad(frm.getGammaRad() + 3.1416);
 		
 		actTCP.move(ptp(frm).setJointVelocityRel(.1));
