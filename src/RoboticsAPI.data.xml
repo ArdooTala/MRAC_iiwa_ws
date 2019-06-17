@@ -233,7 +233,8 @@
                     <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
                 </frame>
                 <frame id="_745481a7-7fae-4d23-8260-aa0be17f321e" name="Pin">
-                    <transformation a="1.5708" b="1.5708" c="0.0" x="-21.640737214542455" y="-127.65020978690309" z="5.002872238087434"/>
+                    <transformation a="1.5708" b="1.5708" c="0.0" x="-21.59996064704043" y="-127.18193858890933" z="5.436982229419848"/>
+                    <measurementTranslation calculationError="0.36808651047317315" method="XYZ4Point" timestamp="1560777551830"/>
                 </frame>
                 <frame id="_92ba4ef4-e078-4b0e-9403-335aa7d0b848" name="Camera">
                     <transformation a="0.5427974" b="0.010821" c="-1.579523" x="9.12" y="112.27" z="54.52"/>
