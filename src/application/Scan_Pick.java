@@ -27,8 +27,10 @@ import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.geometricModel.math.CoordinateAxis;
 import com.kuka.roboticsAPI.motionModel.IMotionContainer;
+import com.kuka.roboticsAPI.motionModel.PositionHold;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.PositionControlMode;
+import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
 
 /**
  * Implementation of a robot application.
@@ -74,6 +76,10 @@ public class Scan_Pick extends RoboticsAPIApplication {
     
     BeckhoffIOGroup io;
 	
+    private static final int stiffnessZ = 300;
+	private static final int stiffnessY = 300;
+	private static final int stiffnessX = 300;
+    
 	@Override
 	public void initialize() {
 		// initialize your application here
@@ -320,6 +326,20 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		
 		jointPosition = new JointPosition(1,-.5,0,-1,.5,1,0);
 		actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
+		
+		CartesianImpedanceControlMode impedanceControlMode = 	new CartesianImpedanceControlMode();
+		impedanceControlMode.parametrize(CartDOF.X).setStiffness(stiffnessX);
+		impedanceControlMode.parametrize(CartDOF.Y).setStiffness(stiffnessY);
+		impedanceControlMode.parametrize(CartDOF.Z).setStiffness(stiffnessZ);
+
+		// The robot is set to position hold and impedance control mode gets activated without a timeout. 
+		IMotionContainer positionHoldContainer = iiwa_14.moveAsync((new PositionHold(impedanceControlMode, -1, null)));
+
+		getLogger().info("Show modal dialog while executing position hold");
+		getApplicationUI().displayModalDialog(ApplicationDialogType.INFORMATION, "Press ok to finish the application.", "OK");
+
+		// As soon as the modal dialog returns, the motion container will be cancelled. This finishes the position hold. 
+		positionHoldContainer.cancel();
 	}
 	
     public void dispose(){
