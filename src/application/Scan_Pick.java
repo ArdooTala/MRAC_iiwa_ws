@@ -114,7 +114,17 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	public void run() {
 		// your application execution starts here
 //		iiwa_14.move(ptpHome());
-		camTCP.moveAsync(ptp(getApplicationData().getFrame("/Scan_Pose/P1")).setJointVelocityRel(.2));
+		//camTCP.moveAsync(ptp(getApplicationData().getFrame("/Scan_Pose/P1")).setJointVelocityRel(.2));
+		JointPosition jointPosition = new JointPosition(
+				Math.toRadians(80),
+				Math.toRadians(11),
+				Math.toRadians(6),
+				Math.toRadians(-45),
+				Math.toRadians(7),
+				Math.toRadians(40),
+				Math.toRadians(-126));
+		camTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
+		
 		running = true;
 		// your application execution starts here
 		while (running) {
@@ -155,6 +165,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 	}
 	
 	public void seek() {
+		
 		IMotionContainer scan;
 		boolean found = false;
 		while (!found) {
@@ -304,7 +315,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		
 		ThreadUtil.milliSleep(3000);
 		
-		jointPosition = new JointPosition(1,-.5,0,-1,0,1,0);
+		jointPosition = new JointPosition(1,-.5,0,-1,.5,1,0);
 		actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
 	}
 	
