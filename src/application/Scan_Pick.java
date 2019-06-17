@@ -333,7 +333,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		impedanceControlMode.parametrize(CartDOF.Z).setStiffness(stiffnessZ);
 
 		// The robot is set to position hold and impedance control mode gets activated without a timeout. 
-		IMotionContainer positionHoldContainer = iiwa_14.moveAsync((new PositionHold(impedanceControlMode, -1, null)));
+		IMotionContainer positionHoldContainer = actTCP.moveAsync((new PositionHold(impedanceControlMode, -1, null)));
 
 		getLogger().info("Show modal dialog while executing position hold");
 		getApplicationUI().displayModalDialog(ApplicationDialogType.INFORMATION, "Press ok to finish the application.", "OK");
