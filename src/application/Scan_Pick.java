@@ -241,13 +241,13 @@ public class Scan_Pick extends RoboticsAPIApplication {
 				}
 		        _smartServoLINRuntime = aSmartServoLINMotion.getRuntime();
 		        frm = _smartServoLINRuntime.getCurrentCartesianPosition(camTCP);
-		        getLogger().info(Double.toString(frm.getX()) + " :: " + Double.toString(frm.getY()));
-		        getLogger().info(Double.toString(dX) + ", " + Double.toString(dY));
+		        // getLogger().info(Double.toString(frm.getX()) + " :: " + Double.toString(frm.getY()));
+		        // getLogger().info(Double.toString(dX) + ", " + Double.toString(dY));
 		        double newX = frm.getX() + dX;
 		        double newY = frm.getY() + dY;
 		        frm.setX(newX);
 		        frm.setY(newY);
-		        getLogger().info(Double.toString(frm.getX()) + " :: " + Double.toString(frm.getY()));
+		        // getLogger().info(Double.toString(frm.getX()) + " :: " + Double.toString(frm.getY()));
 				_smartServoLINRuntime.setMaxTranslationVelocity(vel);
 				_smartServoLINRuntime.setDestination(frm);
 	            
@@ -269,13 +269,13 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		
 		frm.setX(frm.getX() + dX);
 		frm.setY(frm.getY() + dY);
-		frm.setZ(400);
+		frm.setZ(300);
 		
 		frm.setAlphaRad(-1.5707);
 		frm.setBetaRad(-1.5707);
 		frm.setGammaRad(1.5707 + dG);
 		
-		actTCP.move(ptp(frm).setJointVelocityRel(.1));
+		actTCP.move(ptp(frm).setJointVelocityRel(.3));
 		
 		actTCP.move(lin(frm).setCartVelocity(100).breakWhen(forceDetected));
 		
