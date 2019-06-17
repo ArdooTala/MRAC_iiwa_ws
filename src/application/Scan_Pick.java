@@ -265,8 +265,8 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		frm.setZ(400);
 		
 		frm.setAlphaRad(-1.5707);
-		frm.setBetaRad(0);
-		frm.setGammaRad(3.1416);
+		frm.setBetaRad(-1.5707);
+		frm.setGammaRad(1.5707);
 		
 		actTCP.move(ptp(frm).setJointVelocityRel(.1));
 
