@@ -269,10 +269,6 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		frm.setGammaRad(1.5707);
 		
 		actTCP.move(ptp(frm).setJointVelocityRel(.1));
-
-		iiwa_14.move(positionHold(force , 3 , TimeUnit. SECONDS ));
-		
-		actTCP.move(ptp(frm).setJointVelocityRel(.1));
 		
 		actTCP.move(lin(frm).setCartVelocity(100).breakWhen(forceDetected));
 		
