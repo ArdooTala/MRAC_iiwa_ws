@@ -304,7 +304,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		
 		ThreadUtil.milliSleep(3000);
 		
-		jointPosition = new JointPosition(-Math.PI/2,0,0,0,Math.PI/2,Math.PI/2,0);
+		jointPosition = new JointPosition(0,-.5,0,-1,0,1,0);
 		actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
 	}
 	
