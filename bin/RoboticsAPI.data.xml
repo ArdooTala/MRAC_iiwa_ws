@@ -236,7 +236,7 @@
                     <transformation a="1.5708" b="1.5708" c="0.0" x="-21.640737214542455" y="-127.65020978690309" z="5.002872238087434"/>
                 </frame>
                 <frame id="_92ba4ef4-e078-4b0e-9403-335aa7d0b848" name="Camera">
-                    <transformation a="0.5427974" b="0.010821" c="-1.579523" x="9.12" y="112.27" z="54.52"/>
+                    <transformation a="0.513681" b="0.013926" c="-1.480963" x="9.12" y="112.27" z="54.52"/>
                 </frame>
             </frames>
             <additionalInformation>
