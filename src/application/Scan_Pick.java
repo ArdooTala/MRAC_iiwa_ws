@@ -285,11 +285,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		
 		actTCP.move(ptp(frm).setJointVelocityRel(.5));
 		
-		// actTCP.move(lin(frm).setCartVelocity(200).breakWhen(forceDetected));
-		
 		frm.setZ(65);
-//		actTCP.move(lin(frm).setCartVelocity(10));
-//		
 		actTCP.move(lin(frm).setCartVelocity(30).breakWhen(forceDetected));
 		
 		io.setOut1(true);
@@ -298,7 +294,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		iiwa_14.move(positionHold(force , 3 , TimeUnit. SECONDS));
 		
 		frm.setZ(400);
-		actTCP.move(lin(frm).setCartVelocity(500));
+		actTCP.move(lin(frm).setCartVelocity(400));
 		
 		JointPosition jointPosition = new JointPosition(-Math.PI/2,0,0,0,Math.PI/2,Math.PI/2,0);
 		actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
