@@ -336,7 +336,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		IMotionContainer positionHoldContainer = actTCP.moveAsync((new PositionHold(impedanceControlMode, -1, null)));
 
 		getApplicationUI().displayModalDialog(ApplicationDialogType.INFORMATION, "Press ok to finish the application.", "OK");
-
+		io.setOut1(false);
 		// As soon as the modal dialog returns, the motion container will be cancelled. This finishes the position hold. 
 		positionHoldContainer.cancel();
 	}
