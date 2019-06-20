@@ -237,7 +237,7 @@
                     <measurementTranslation calculationError="0.5065530074914864" method="XYZ4Point" timestamp="1560855956888"/>
                 </frame>
                 <frame id="_92ba4ef4-e078-4b0e-9403-335aa7d0b848" name="Camera">
-                    <transformation a="0.513681" b="0.013926" c="-1.480963" x="9.12" y="112.27" z="54.52"/>
+                    <transformation a="-2.602481" b="-0.008629" c="1.541731" x="9.12" y="112.27" z="54.52"/>
                 </frame>
             </frames>
             <additionalInformation>
