@@ -113,7 +113,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		rigid = new PositionControlMode();
 		
 		//break action on force
-		forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.Z, 10);
+		forceDetected = ForceCondition.createNormalForceCondition(actTCP, CoordinateAxis.Z, 12);
 	}
 
 	@Override
@@ -316,7 +316,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		JointPosition jointPosition = new JointPosition(-Math.PI/2,0,0,0,Math.PI/2,Math.PI/2,0);
 		actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
 		
-		jointPosition = new JointPosition(-5*Math.PI/8, 1, 0, -Math.PI/2+1, 0, Math.PI/2, -Math.PI/2);
+		jointPosition = new JointPosition(-3*Math.PI/4, 1, 0, -Math.PI/2+1, 0, Math.PI/2, -Math.PI/2);
 		actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
 		
 		ThreadUtil.milliSleep(2000);
@@ -337,6 +337,9 @@ public class Scan_Pick extends RoboticsAPIApplication {
 
 		getApplicationUI().displayModalDialog(ApplicationDialogType.INFORMATION, "Press ok to finish the application.", "OK");
 		io.setOut1(false);
+		
+		jointPosition = new JointPosition(-Math.PI/2,0,0,0,Math.PI/2,Math.PI/2,0);
+		actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
 		// As soon as the modal dialog returns, the motion container will be cancelled. This finishes the position hold. 
 		//positionHoldContainer.cancel();
 	}
