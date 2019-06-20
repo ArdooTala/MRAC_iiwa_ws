@@ -130,7 +130,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 				Math.toRadians(40),
 				Math.toRadians(-126));
 		camTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
-		
+		seek();
 		running = true;
 		// your application execution starts here
 		while (running) {
