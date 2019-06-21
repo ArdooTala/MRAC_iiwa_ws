@@ -321,19 +321,19 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		
 		ThreadUtil.milliSleep(2000);
 		
-		//jointPosition = new JointPosition(-Math.PI/2,0,0,0,Math.PI/2,Math.PI/2,0);
-		//actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
+		jointPosition = new JointPosition(0,0,0,Math.PI/2,0,Math.PI/3,0);
+		actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
 		
 		//jointPosition = new JointPosition(1,-.5,0,-1,.5,1,0);
 		//actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
 		
-		//CartesianImpedanceControlMode impedanceControlMode = 	new CartesianImpedanceControlMode();
-		//impedanceControlMode.parametrize(CartDOF.X).setStiffness(stiffnessX);
-		//impedanceControlMode.parametrize(CartDOF.Y).setStiffness(stiffnessY);
-		//impedanceControlMode.parametrize(CartDOF.Z).setStiffness(stiffnessZ);
+		CartesianImpedanceControlMode impedanceControlMode = 	new CartesianImpedanceControlMode();
+		impedanceControlMode.parametrize(CartDOF.X).setStiffness(stiffnessX);
+		impedanceControlMode.parametrize(CartDOF.Y).setStiffness(stiffnessY);
+		impedanceControlMode.parametrize(CartDOF.Z).setStiffness(stiffnessZ);
 
 		// The robot is set to position hold and impedance control mode gets activated without a timeout. 
-		//IMotionContainer positionHoldContainer = actTCP.moveAsync((new PositionHold(impedanceControlMode, -1, null)));
+		IMotionContainer positionHoldContainer = actTCP.moveAsync((new PositionHold(impedanceControlMode, -1, null)));
 
 		getApplicationUI().displayModalDialog(ApplicationDialogType.INFORMATION, "Press ok to finish the application.", "OK");
 		io.setOut1(false);
@@ -341,7 +341,7 @@ public class Scan_Pick extends RoboticsAPIApplication {
 		jointPosition = new JointPosition(-Math.PI/2,0,0,0,Math.PI/2,Math.PI/2,0);
 		actTCP.move(ptp(jointPosition).setJointVelocityRel(.5));
 		// As soon as the modal dialog returns, the motion container will be cancelled. This finishes the position hold. 
-		//positionHoldContainer.cancel();
+		positionHoldContainer.cancel();
 	}
 	
     public void dispose(){
