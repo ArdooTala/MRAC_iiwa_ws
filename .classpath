@@ -100,5 +100,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/IAAC_prc14MFip/KUKAJavaLib/#Bundle-JavaDoc#!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Ardoo/Desktop/opencv/build/java/opencv-410.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
